@@ -3,47 +3,52 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Still Here</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="description" content="still here — a place made with love" />
+  <meta name="theme-color" content="#0d0d0d" />
+  <meta name="robots" content="noindex, nofollow" />
 
-  <!-- Link to external CSS -->
+  <title>still here</title>
+
+  <!-- External CSS -->
   <link rel="stylesheet" href="css/style.css" />
 
-  <!-- Custom font (optional) -->
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet" />
 
-  <!-- Favicon (optional) -->
+  <!-- Favicon -->
   <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
 </head>
 
 <body>
-  <!-- 🌀 Particle Background Layer -->
+  <!-- 🌀 Particle Background -->
   <div id="particles-js"></div>
 
   <!-- 🔒 Login Container -->
-  <div class="container">
-    <!-- Mute/Unmute Toggle -->
+  <main class="container" role="main" aria-label="login">
+    <!-- 🎧 Mute Toggle -->
     <div class="audio-toggle">
-      <button id="mute-btn">mute</button>
+      <button id="mute-btn" aria-label="toggle music">mute</button>
     </div>
 
-    <!-- Login Box -->
-    <div class="login-box">
-      <h1 class="title">enter your password</h1>
-      <input type="password" id="password" placeholder="Password..." />
-      <button id="unlock-btn">unlock</button>
-      <p id="error-msg"></p>
-    </div>
-  </div>
+    <!-- 🔐 Login Box -->
+    <section class="login-box" aria-labelledby="password-title">
+      <h1 id="password-title" class="title">enter your password</h1>
+      <input type="password" id="password" placeholder="Password..." aria-label="password field" autocomplete="off" />
+      <button id="unlock-btn" aria-label="unlock">unlock</button>
+      <p id="error-msg" role="alert" aria-live="polite"></p>
+    </section>
+  </main>
 
   <!-- 🎵 Background Music -->
   <audio id="bg-music" autoplay loop>
     <source src="assets/bg-music.mp3" type="audio/mp3" />
-    Your browser does not support the audio tag.
+    Your browser does not support the audio element.
   </audio>
 
   <!-- 🔧 Scripts -->
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-  <script src="js/particles.js"></script>
-  <script src="js/script.js"></script>
+  <script src="js/particles.js" defer></script>
+  <script src="js/script.js" defer></script>
 </body>
 </html>
