@@ -51,7 +51,6 @@ body {
   z-index: 1;
   opacity: 0.8;
 }
-
 @keyframes pulse {
   0% { background-position: 0 0; }
   100% { background-position: 0 100px; }
@@ -114,8 +113,16 @@ body {
   transform: rotate(2deg);
   animation: floatRight 5s ease-in-out infinite;
 }
+@keyframes floatLeft {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-5px) rotate(0deg); }
+}
+@keyframes floatRight {
+  0%, 100% { transform: translateY(0) rotate(2deg); }
+  50% { transform: translateY(5px) rotate(0deg); }
+}
 
-/* === FLAP TRIANGLE FOR STEP 2 === */
+/* === ENVELOPE OPEN FLAP === */
 .envelope.open::before {
   content: '';
   position: absolute;
@@ -125,29 +132,33 @@ body {
   height: 60px;
   background-color: #d4d4d4;
   clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
-  z-index: 2;
+  z-index: 3;
 }
 
-/* === TAP TEXT ABOVE PAPER === */
-.tap-hint {
+/* === FAKE PAPER STICKING OUT === */
+.envelope.open .fake-paper {
   position: absolute;
-  top: -30px;
+  top: 75%;
   left: 50%;
   transform: translateX(-50%);
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 13px;
+  background: #fffefc;
+  border: 1px solid #ccc;
+  width: 160px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-family: 'Special Elite', monospace;
-  animation: floatHint 2.5s ease-in-out infinite;
+  font-size: 13px;
+  color: #222;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  z-index: 4;
   pointer-events: none;
-  z-index: 5;
+  opacity: 1;
 }
 
-@keyframes floatHint {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(-5px); }
-}
-
-/* === PLACEHOLDER TEXT === */
+/* === PLACEHOLDER TEXT INSIDE ENVELOPE === */
 .envelope::after {
   content: attr(data-placeholder);
   position: absolute;
@@ -164,17 +175,7 @@ body {
   transform: scale(1.05) rotate(0deg);
 }
 
-/* === FLOATING IDLE ANIMATION === */
-@keyframes floatLeft {
-  0%, 100% { transform: translateY(0) rotate(-2deg); }
-  50% { transform: translateY(-5px) rotate(0deg); }
-}
-@keyframes floatRight {
-  0%, 100% { transform: translateY(0) rotate(2deg); }
-  50% { transform: translateY(5px) rotate(0deg); }
-}
-
-/* === LETTER MESSAGE (PAPER) === */
+/* === LETTER MESSAGE (REAL PAPER) === */
 .paper {
   margin-top: 20px;
   padding: 20px;
@@ -199,6 +200,24 @@ body {
   transform: scale(1);
 }
 
+/* === FULLSCREEN HINT ABOVE PAPER === */
+.fullscreen-hint {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 13px;
+  font-family: 'Special Elite', monospace;
+  color: rgba(255,255,255,0.6);
+  animation: floatHint 2.5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 6;
+}
+@keyframes floatHint {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-5px); }
+}
+
 /* === FLOATING QUOTES === */
 .floating-quotes {
   position: fixed;
@@ -214,12 +233,13 @@ body {
   position: absolute;
   white-space: nowrap;
   font-size: 16px;
-  opacity: 0.15;
-  animation: floatQuote 20s ease-in-out infinite;
+  opacity: 0.12;
   color: #ffffff;
   font-family: 'Special Elite', monospace;
+  animation: floatQuote 20s ease-in-out infinite;
   top: calc(100% * var(--i) / 15 + (10px * var(--j)));
   left: calc(100% * var(--j) / 20 + (15px * var(--i)));
+  transform: translate(-50%, -50%);
 }
 .floating-quotes span.glow {
   color: #ff4e50;
@@ -227,7 +247,6 @@ body {
   opacity: 0.2;
   animation: floatQuoteGlow 25s ease-in-out infinite;
 }
-
 @keyframes floatQuote {
   0% { transform: translateY(0) translateX(0); }
   50% { transform: translateY(-40px) translateX(10px); }
