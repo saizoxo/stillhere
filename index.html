@@ -49,5 +49,18 @@
   <!-- 🔧 Scripts -->
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script src="js/script.js" defer></script>
+
+  <!-- 🌌 Particle Loader Fix -->
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      if (window.particlesJS) {
+        particlesJS.load("particles-js", "js/particles.json", () => {
+          console.log("✨ Particles loaded from JSON.");
+        });
+      } else {
+        console.warn("🚫 particlesJS is not available.");
+      }
+    });
+  </script>
 </body>
 </html>
