@@ -46,12 +46,8 @@ function onLoginSuccess() {
 // 🌀 Fade Out Only the Login UI (not particles)
 function fadeOut(callback) {
   if (!container) return callback();
-
-  // Only fade the login UI
   container.style.transition = "opacity 1.2s ease";
   container.style.opacity = 0;
-
-  // Ensure callback after fade
   setTimeout(callback, 1200);
 }
 
@@ -72,7 +68,7 @@ function showError(message) {
   errorMsg.style.opacity = 1;
 }
 
-// 🎧 Handle Autoplay + Particles on Load
+// 🎧 Handle Autoplay on Load
 function handleAutoplay() {
   try {
     bgMusic.play().catch(() => {
@@ -82,22 +78,5 @@ function handleAutoplay() {
     console.error("Audio failed to load:", err);
   }
 
-  loadParticles();
-}
-
-// 🌌 Load Particles Background
-function loadParticles() {
-  if (window.particlesJS) {
-    particlesJS.load("particles-js", "js/particles.json", () => {
-      console.log("✨ Particles loaded.");
-    });
-
-    // Extra: Force canvas visibility
-    setTimeout(() => {
-      const canvas = document.querySelector("#particles-js canvas");
-      if (canvas) canvas.style.opacity = 1;
-    }, 1500);
-  } else {
-    console.warn("⚠️ particlesJS not available");
-  }
+  // 🌌 No need to load particles manually — handled inline in index.html
 }
