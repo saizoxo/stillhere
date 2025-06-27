@@ -27,11 +27,22 @@
       padding: 0;
     }
 
+    .letter-list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 200px;
+      padding: 80px 20px;
+    }
+
     .letter-entry {
       display: flex;
+      align-items: flex-start;
       justify-content: center;
+      flex-wrap: wrap;
       position: relative;
-      margin-bottom: 180px;
+      width: 100%;
+      max-width: 960px;
     }
 
     .letter-entry.left .envelope {
@@ -54,6 +65,8 @@
       transition: transform 0.3s ease;
       text-align: center;
       font-size: 14px;
+      margin: 0 20px;
+      flex-shrink: 0;
     }
 
     .envelope:hover {
@@ -76,25 +89,26 @@
     }
 
     .paper {
+      display: none;
       background: #fffefc;
       color: #222;
-      margin-top: 20px;
-      padding: 18px 20px;
+      padding: 20px 24px;
       border-radius: 8px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-      max-width: 420px;
-      width: fit-content;
-      line-height: 1.6;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-      transform: scale(0.8);
-      opacity: 0;
-      font-size: 15px;
+      line-height: 1.8;
+      font-size: 14px;
       font-family: 'Special Elite', cursive;
+      max-width: 480px;
+      width: fit-content;
+      margin-top: 20px;
+      white-space: pre-wrap;
+      overflow-y: auto;
+      max-height: 320px;
     }
 
     .paper.show {
-      transform: scale(1);
-      opacity: 1;
+      display: block;
+      animation: fadeIn 0.5s ease-in-out;
     }
 
     @keyframes floatLeft {
@@ -105,6 +119,11 @@
     @keyframes floatRight {
       0%, 100% { transform: translateX(0px); }
       50% { transform: translateX(10px); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
     }
   </style>
 </head>
@@ -125,10 +144,9 @@
             <div class="tap-hint">tap to read</div>
             <div class="paper-mini">“even storms rest...”</div>
           </div>
-          <div class="paper">
-            <div class="fullscreen-hint">click to full screen</div>
-            <p>Hey you, it’s okay to not be okay. Close your eyes, take a deep breath, and let my love wrap around you like a warm hoodie. You’re safe here. 🤍</p>
-          </div>
+        </div>
+        <div class="paper">
+          hey love i know it’s been heavy lately and everything feels like it’s falling apart but please hold on because this pain won’t last forever you’re doing better than you think and i’m proud of how far you’ve come you don’t have to hide how you feel not from me just rest your head on my words for a while and let yourself breathe for once
         </div>
       </div>
 
@@ -139,10 +157,9 @@
             <div class="tap-hint">tap to read</div>
             <div class="paper-mini">“i miss you too”</div>
           </div>
-          <div class="paper">
-            <div class="fullscreen-hint">click to full screen</div>
-            <p>If you’re reading this, it means I’m hugging you in spirit. Maybe we’re far apart now, but our hearts? Always holding hands. 🫂</p>
-          </div>
+        </div>
+        <div class="paper">
+          i know there are days when you miss me more than others when the silence feels louder and your chest a little tighter and if you’re reading this now then maybe today is one of those days so listen to me closely i miss you too i miss your voice your eyes your smile the way you talk and breathe and exist and i promise one day this space between us won’t feel so wide
         </div>
       </div>
 
@@ -153,10 +170,9 @@
             <div class="tap-hint">tap to read</div>
             <div class="paper-mini">“hehehe…”</div>
           </div>
-          <div class="paper">
-            <div class="fullscreen-hint">click to full screen</div>
-            <p>Remember that one moment we laughed so hard it hurt? Yeah, that one. Replay it in your mind right now. That’s our magic. Still makes me giggle. 🐸💫</p>
-          </div>
+        </div>
+        <div class="paper">
+          remember the day we couldn’t stop laughing and my cheeks started to hurt and you fell back on the bed and i said you looked like a turtle stuck upside down and you just lost it again yeah that day i think about it a lot actually because that was pure and soft and beautiful and it reminds me that whatever happens we still carry that moment in us
         </div>
       </div>
 
@@ -167,10 +183,9 @@
             <div class="tap-hint">tap to read</div>
             <div class="paper-mini">“smile, pookie”</div>
           </div>
-          <div class="paper">
-            <div class="fullscreen-hint">click to full screen</div>
-            <p>This one is short: I love your smile. Show me? There it is 😁 — I felt it from here. You’re beautiful, always have been, always will be.</p>
-          </div>
+        </div>
+        <div class="paper">
+          smile for me please i know it’s a simple thing but you don’t realize how it lights up my whole world you’ve got the kind of smile that makes shadows fade and hearts soften so even if it’s hard today even if everything feels too loud just know that your smile is still the prettiest thing i’ve ever seen and nothing will ever change that
         </div>
       </div>
 
@@ -181,10 +196,9 @@
             <div class="tap-hint">tap to read</div>
             <div class="paper-mini">“mine. yours. always.”</div>
           </div>
-          <div class="paper">
-            <div class="fullscreen-hint">click to full screen</div>
-            <p>I wrote this because you’re my favorite story. My plot twist. My soft ending. I love you, not just today — but in every version of forever. 💌</p>
-          </div>
+        </div>
+        <div class="paper">
+          i wrote this because you are the reason i still believe in softness because you gave me something real and i don’t ever want to go back to before you because even the worst days with you still made me feel more alive than any perfect day without you and i will always come back to you always because you are my home even when everything else is a mess
         </div>
       </div>
 
