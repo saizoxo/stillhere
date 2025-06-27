@@ -20,13 +20,13 @@ muteBtn?.addEventListener("click", toggleMusic);
 window.addEventListener("load", handleAutoplay);
 
 if (loginBox) {
-  // Mouse events
   loginBox.addEventListener("mousemove", handleTilt);
   loginBox.addEventListener("mouseleave", resetTilt);
+  loginBox.addEventListener("mouseenter", applyScale);
 
-  // Touch events
   loginBox.addEventListener("touchmove", handleTiltTouch);
   loginBox.addEventListener("touchend", resetTilt);
+  loginBox.addEventListener("touchstart", applyScale);
 }
 
 // ====== FUNCTIONS ======
@@ -90,16 +90,20 @@ function handleAutoplay() {
   }
 }
 
+// 🎯 Tilt Logic (Shared)
+function computeTilt(x, y, width, height) {
+  const rotateX = ((y / height) - 0.5) * -20;
+  const rotateY = ((x / width) - 0.5) * 20;
+  return { rotateX, rotateY };
+}
+
 // 🧠 Tilt Effect (Mouse)
 function handleTilt(e) {
   const { width, height, left, top } = loginBox.getBoundingClientRect();
   const x = e.clientX - left;
   const y = e.clientY - top;
-
-  const rotateX = ((y / height) - 0.5) * -20;
-  const rotateY = ((x / width) - 0.5) * 20;
-
-  loginBox.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  const { rotateX, rotateY } = computeTilt(x, y, width, height);
+  loginBox.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
 }
 
 // 🧠 Tilt Effect (Touch)
@@ -108,14 +112,18 @@ function handleTiltTouch(e) {
   const { width, height, left, top } = loginBox.getBoundingClientRect();
   const x = touch.clientX - left;
   const y = touch.clientY - top;
+  const { rotateX, rotateY } = computeTilt(x, y, width, height);
+  loginBox.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+}
 
-  const rotateX = ((y / height) - 0.5) * -20;
-  const rotateY = ((x / width) - 0.5) * 20;
-
-  loginBox.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+// ⚡ Scale on hover/tap
+function applyScale() {
+  loginBox.style.transition = "transform 0.2s ease";
+  loginBox.style.transform += " scale(1.03)";
 }
 
 // 🔁 Reset Tilt
 function resetTilt() {
-  loginBox.style.transform = "rotateX(0deg) rotateY(0deg)";
+  loginBox.style.transition = "transform 0.4s ease";
+  loginBox.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)";
 }
