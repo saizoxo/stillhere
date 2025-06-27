@@ -1,64 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>still here</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
-</head>
-<body class="unlocked">
+<!DOCTYPE html>  <html lang="en">  
+<head>  
+  <meta charset="UTF-8" />  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
+  <title>still here</title>    <!-- Fonts & Favicon -->    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet" />  
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />    <!-- Stylesheets -->    <link rel="stylesheet" href="css/style.css" />  
+  <link rel="stylesheet" href="css/home.css" />    <!-- Scripts -->    <script src="js/home.js" defer></script>  </head>  <body class="unlocked">  
+  <!-- 🎵 Background Music -->  
+  <audio id="bgMusic" src="assets/bg-music.mp3" autoplay loop></audio>  
+  <button id="mute-btn" class="mute-button">mute</button>    <!-- 💌 Letters Timeline -->    <div class="letters-timeline">  
+    <div class="animated-string"></div>  <div class="letter-list">  
+  <!-- 🔁 20 Hanging Letters -->  
+  <div class="letter-entry left"><div class="envelope" data-id="1" data-placeholder="open when you're sad"></div></div>  
+  <div class="letter-entry right"><div class="envelope" data-id="2" data-placeholder="read when you miss me"></div></div>  
+  <div class="letter-entry left"><div class="envelope" data-id="3" data-placeholder="remember this?"></div></div>  
+  <div class="letter-entry right"><div class="envelope" data-id="4" data-placeholder="when you need a smile"></div></div>  
+  <div class="letter-entry left"><div class="envelope" data-id="5" data-placeholder="when you can't sleep"></div></div>  
+  <div class="letter-entry right"><div class="envelope" data-id="6" data-placeholder="i wrote this for you"></div></div>  
+  <div class="letter-entry left"><div class="envelope" data-id="7" data-placeholder="when life gets tough"></div></div>  
+  <div class="letter-entry right"><div class="envelope" data-id="8" data-placeholder="the silly letter"></div></div>  
+  <div class="letter-entry left"><div class="envelope" data-id="9" data-placeholder="💌"></div></div>  
+  <div class="letter-entry right"><div class="envelope" data-id="10" data-placeholder="nostalgia trip"></div></div>  
+  <div class="letter-entry left"><div class="envelope" data-id="11" data-placeholder="when you're angry"></div></div>  
+  <div class="letter-entry right"><div class="envelope" data-id="12" data-placeholder="a tiny surprise"></div></div>  
+  <div class="letter-entry left"><div class="envelope" data-id="13" data-placeholder="just because"></div></div>  
+  <div class="letter-entry right"><div class="envelope" data-id="14" data-placeholder="secret memory"></div></div>  
+  <div class="letter-entry left"><div class="envelope" data-id="15" data-placeholder="open me slowly"></div></div>  
+  <div class="letter-entry right"><div class="envelope" data-id="16" data-placeholder="because i care"></div></div>  
+  <div class="letter-entry left"><div class="envelope" data-id="17" data-placeholder="read this at night"></div></div>  
+  <div class="letter-entry right"><div class="envelope" data-id="18" data-placeholder="shhh… it's a secret"></div></div>  
+  <div class="letter-entry left"><div class="envelope" data-id="19" data-placeholder="when you're curious"></div></div>  
+  <div class="letter-entry right"><div class="envelope" data-id="20" data-placeholder="one last note"></div></div>  
+</div>
 
-  <!-- 🎵 Background Music -->
-  <audio id="bgMusic" src="assets/bg-music.mp3" autoplay loop></audio>
-  <button id="mute-btn" class="mute-button">mute</button>
-
-  <!-- 💌 Letters Timeline -->
-  <div class="letters-timeline">
-    <div class="animated-string"></div>
-    <div class="letter-list">
-      <!-- Looping 20 Letters -->
-      <div class="letter-entry left"><div class="envelope" data-placeholder="open when you're sad">💌</div></div>
-      <div class="letter-entry right"><div class="envelope" data-placeholder="read when you miss me">💌</div></div>
-      <div class="letter-entry left"><div class="envelope" data-placeholder="remember this?">💌</div></div>
-      <div class="letter-entry right"><div class="envelope" data-placeholder="when you need a smile">💌</div></div>
-      <div class="letter-entry left"><div class="envelope" data-placeholder="when you can't sleep">💌</div></div>
-      <div class="letter-entry right"><div class="envelope" data-placeholder="i wrote this for you">💌</div></div>
-      <div class="letter-entry left"><div class="envelope" data-placeholder="when life gets tough">💌</div></div>
-      <div class="letter-entry right"><div class="envelope" data-placeholder="the silly letter">💌</div></div>
-      <div class="letter-entry left"><div class="envelope" data-placeholder="💌">💌</div></div>
-      <div class="letter-entry right"><div class="envelope" data-placeholder="nostalgia trip">💌</div></div>
-      <div class="letter-entry left"><div class="envelope" data-placeholder="when you're angry">💌</div></div>
-      <div class="letter-entry right"><div class="envelope" data-placeholder="a tiny surprise">💌</div></div>
-      <div class="letter-entry left"><div class="envelope" data-placeholder="just because">💌</div></div>
-      <div class="letter-entry right"><div class="envelope" data-placeholder="secret memory">💌</div></div>
-      <div class="letter-entry left"><div class="envelope" data-placeholder="open me slowly">💌</div></div>
-      <div class="letter-entry right"><div class="envelope" data-placeholder="because i care">💌</div></div>
-      <div class="letter-entry left"><div class="envelope" data-placeholder="read this at night">💌</div></div>
-      <div class="letter-entry right"><div class="envelope" data-placeholder="shhh… it's a secret">💌</div></div>
-      <div class="letter-entry left"><div class="envelope" data-placeholder="when you're curious">💌</div></div>
-      <div class="letter-entry right"><div class="envelope" data-placeholder="one last note">💌</div></div>
-    </div>
-  </div>
-
-  <!-- 💬 Floating Quotes -->
-  <div class="floating-quotes">
-    <span style="--i:1; --j:1">I love you, jaana</span>
-    <span style="--i:2; --j:2">I love you more, jaana. I love you more</span>
-    <span style="--i:3; --j:3">You are my kucha-pucha</span>
-    <span style="--i:4; --j:4">For me, you are my inni si pookie</span>
-    <span style="--i:5; --j:5">I accept</span>
-    <span style="--i:6; --j:6">You are a blessing, jaana</span>
-    <span style="--i:7; --j:7">Good morning, jaana</span>
-    <span style="--i:8; --j:8">I don’t like to say bye</span>
-    <span style="--i:9; --j:9">Go now, or else I won’t be able to send you</span>
-    <span style="--i:10; --j:10">I’m craving heart for you, jaana</span>
-    <span style="--i:11; --j:11">I will always be yours</span>
-    <span style="--i:12; --j:12">You are mine. I am yours. It’s as simple as that</span>
-    <span class="glow" style="--i:13; --j:13">I love you, Shreya</span>
-  </div>
-
-  <script src="js/home.js"></script>
-</body>
+  </div>    <!-- 💬 Floating Quotes -->    <div class="floating-quotes">  
+    <span style="--i:1">I love you, jaana</span>  
+    <span style="--i:2">I love you more, jaana. I love you more</span>  
+    <span style="--i:3">You are my kucha-pucha</span>  
+    <span style="--i:4">For me, you are my inni si pookie</span>  
+    <span style="--i:5">I accept</span>  
+    <span style="--i:6">You are a blessing, jaana. You are a blessing</span>  
+    <span style="--i:7">Good morning, jaana</span>  
+    <span style="--i:8">I don’t like to say bye</span>  
+    <span style="--i:9">Go now, or else I won’t be able to send you</span>  
+    <span style="--i:10">I’m craving heart for you, jaana</span>  
+    <span style="--i:11">I will always be yours</span>  
+    <span style="--i:12">You are mine. I am yours. It’s as simple as that</span>  
+    <span class="glow" style="--i:13">I love you, Shreya</span>  
+  </div>  
+</body>  
 </html>
