@@ -1,92 +1,93 @@
 // script.js
 
-// ====== GLOBALS ======
-const correctPassword = "iloveyou";  // Change as needed
-let attemptsLeft = 3;
+// ===== CONFIGURATION =====
+const CORRECT_PASSWORD = "iloveyou";
+const MAX_ATTEMPTS = 3;
 
-// DOM Elements
+// ===== STATE VARIABLES =====
+let attemptsLeft = MAX_ATTEMPTS;
+
+// ===== DOM ELEMENTS =====
 const passwordInput = document.getElementById("password");
-const unlockBtn = document.getElementById("unlockBtn");
-const errorMsg = document.getElementById("error");
-const pageContent = document.querySelector(".fadeout-container");
-const bgMusic = document.getElementById("bgMusic");
-const muteBtn = document.getElementById("muteBtn");
+const unlockBtn = document.getElementById("unlock-btn");
+const errorMsg = document.getElementById("error-msg");
+const muteBtn = document.getElementById("mute-btn");
+const bgMusic = document.getElementById("bg-music");
+const pageContainer = document.querySelector(".container");
+
+// ====== EVENT BINDING ======
+unlockBtn?.addEventListener("click", validatePassword);
+muteBtn?.addEventListener("click", toggleMusic);
+window.addEventListener("load", handleAutoplay);
 
 // ====== FUNCTIONS ======
 
-// Toggle music mute/unmute
-function toggleMute() {
-  if (bgMusic.paused) {
-    bgMusic.play();
-    muteBtn.textContent = "Mute";
-  } else {
-    bgMusic.pause();
-    muteBtn.textContent = "Unmute";
-  }
-}
-
-// Validate password input
-function checkPassword() {
-  const enteredPassword = passwordInput.value.trim();
-
-  if (enteredPassword === correctPassword) {
-    unlockSuccess();
+// 🔐 Validate Password
+function validatePassword() {
+  const entered = passwordInput.value.trim();
+  if (entered === CORRECT_PASSWORD) {
+    onLoginSuccess();
   } else {
     attemptsLeft--;
     if (attemptsLeft <= 0) {
-      window.location.href = "404.html"; // Redirect to custom error page
+      window.location.href = "404.html";
     } else {
       showError(`Incorrect password. ${attemptsLeft} attempt(s) left.`);
     }
   }
 }
 
-// Handle successful login
-function unlockSuccess() {
-  errorMsg.textContent = "";
-  fadeOutContent(() => {
-    window.location.href = "home.html"; // Redirect to home after fade out
+// ✅ On Login Success
+function onLoginSuccess() {
+  showError("");
+  fadeOut(() => {
+    window.location.href = "home.html";
   });
 }
 
-// Animate content fade-out
-function fadeOutContent(callback) {
-  if (!pageContent) return callback();
-
-  pageContent.style.transition = "opacity 1.5s ease";
-  pageContent.style.opacity = 0;
-  setTimeout(callback, 1500); // After fade out
-}
-
-// Show error message
-function showError(msg) {
-  errorMsg.textContent = msg;
-  errorMsg.style.opacity = 1;
-  errorMsg.style.transition = "opacity 0.3s ease";
-}
-
-// Optionally initialize particles
-function initParticles() {
-  if (window.particlesJS) {
-    particlesJS.load('particles-js', 'js/particles.json', function () {
-      console.log('🎆 Particles loaded.');
-    });
+// 🎵 Toggle Music
+function toggleMusic() {
+  if (bgMusic.paused) {
+    bgMusic.play();
+    muteBtn.textContent = "mute";
+  } else {
+    bgMusic.pause();
+    muteBtn.textContent = "unmute";
   }
 }
 
-// ====== EVENT LISTENERS ======
-unlockBtn.addEventListener("click", checkPassword);
-muteBtn.addEventListener("click", toggleMute);
+// 💬 Show Error
+function showError(message) {
+  errorMsg.textContent = message;
+  errorMsg.style.opacity = 1;
+}
 
-// Auto-play music if allowed
-window.addEventListener("load", () => {
+// 🌀 Fade out Animation
+function fadeOut(callback) {
+  if (!pageContainer) return callback();
+  pageContainer.style.transition = "opacity 1.2s ease";
+  pageContainer.style.opacity = 0;
+  setTimeout(callback, 1200);
+}
+
+// 🎧 Handle Autoplay on Load
+function handleAutoplay() {
   try {
     bgMusic.play().catch(() => {
       console.warn("Autoplay blocked.");
     });
-  } catch (e) {
-    console.error("Music failed to start:", e);
+  } catch (err) {
+    console.error("Audio failed to load:", err);
   }
 
-  initParticles(); // Load particle animation if available
-});
+  loadParticles(); // Load if available
+}
+
+// 🌌 Load Particles
+function loadParticles() {
+  if (window.particlesJS) {
+    particlesJS.load("particles-js", "js/particles.json", () => {
+      console.log("✨ Particles loaded.");
+    });
+  }
+}
