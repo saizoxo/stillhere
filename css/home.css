@@ -218,10 +218,6 @@ body {
   animation: floatQuote 20s ease-in-out infinite;
   color: #ffffff;
   font-family: 'Special Elite', monospace;
-
-  /* ✅ Fallback-safe positioning for --i only */
-  top: calc(var(--i, 1) * 6%);
-  left: calc((var(--i, 1) * 12%) + 10px);
 }
 .floating-quotes span.glow {
   color: #ff4e50;
