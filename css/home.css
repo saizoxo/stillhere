@@ -66,10 +66,11 @@ body {
   position: relative;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+  gap: 40px;
   width: 100%;
-  gap: 30px;
 }
+
 .letter-entry::before {
   content: '';
   position: absolute;
@@ -82,15 +83,7 @@ body {
   z-index: 0;
 }
 
-.letter-entry.left .paper {
-  order: 2;
-  margin-left: 20px;
-}
-.letter-entry.right .paper {
-  order: 1;
-  margin-right: 20px;
-}
-
+/* ENVELOPE */
 .envelope {
   position: relative;
   width: 260px;
@@ -104,23 +97,17 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
   cursor: pointer;
-  transition: transform 0.3s ease;
-  transform: rotate(-2deg);
-  z-index: 3;
-  overflow: hidden;
+  transition: transform 0.4s ease;
+  z-index: 5;
   animation: floatLeft 5s ease-in-out infinite;
 }
 .letter-entry.right .envelope {
-  transform: rotate(2deg);
   animation: floatRight 5s ease-in-out infinite;
 }
-
 .envelope:hover {
-  transform: scale(1.05) rotate(0deg);
+  transform: scale(1.05);
 }
-
 .envelope::after {
   content: attr(data-placeholder);
   position: absolute;
@@ -133,14 +120,75 @@ body {
   padding: 0 10px;
   pointer-events: none;
 }
-
 @keyframes floatLeft {
-  0%, 100% { transform: translateY(0) rotate(-2deg); }
-  50% { transform: translateY(-5px) rotate(0deg); }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
 }
 @keyframes floatRight {
-  0%, 100% { transform: translateY(0) rotate(2deg); }
-  50% { transform: translateY(5px) rotate(0deg); }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+
+.envelope.open {
+  transform: translateX(-180px) scale(1.02);
+  z-index: 6;
+}
+
+/* PAPER */
+.paper {
+  display: block;
+  position: absolute;
+  left: calc(50% + 180px);
+  top: 50%;
+  transform: translateY(-50%) scale(0.95);
+  padding: 24px 28px;
+  background: #fffefc;
+  color: #1a1a1a;
+  border: 2px solid #d6ccc2;
+  border-radius: 6px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  font-family: 'Special Elite', monospace;
+  font-size: 15px;
+  line-height: 1.7;
+  max-width: 380px;
+  max-height: 320px;
+  overflow-y: auto;
+  opacity: 0;
+  transition: all 0.4s ease;
+  z-index: 4;
+  pointer-events: none;
+}
+.paper.show {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+  pointer-events: auto;
+}
+
+/* FULLSCREEN PAPER */
+.paper.fullscreen {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.08);
+  width: 90%;
+  max-width: 700px;
+  max-height: 90vh;
+  padding: 30px;
+  font-size: 16px;
+  line-height: 1.9;
+  z-index: 999;
+  pointer-events: auto;
+}
+
+/* Optional: fullscreen dark background effect */
+.paper.fullscreen::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: -1;
 }
 
 .tap-hint {
@@ -158,74 +206,6 @@ body {
 @keyframes floatHint {
   0%, 100% { transform: translateX(-50%) translateY(0); }
   50% { transform: translateX(-50%) translateY(-5px); }
-}
-
-.paper-slide {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translate(-50%, 100%);
-  width: 90%;
-  height: auto;
-  background: #fffdf7;
-  border-radius: 4px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
-  padding: 12px 16px;
-  font-family: 'Special Elite', monospace;
-  font-size: 14px;
-  color: #2e2e2e;
-  transition: transform 0.4s ease, opacity 0.4s ease;
-  opacity: 0;
-  z-index: 3;
-}
-.envelope.open .paper-slide {
-  transform: translate(-50%, 20%);
-  opacity: 1;
-}
-
-.envelope.open::before {
-  content: '';
-  position: absolute;
-  top: -60px;
-  left: 0;
-  width: 100%;
-  height: 60px;
-  background-color: #d4d4d4;
-  clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
-  z-index: 2;
-}
-.envelope.open {
-  z-index: 4;
-  transform: scale(1.02) translateY(5px);
-}
-
-.paper {
-  display: none;
-  position: absolute;
-  bottom: -200px;
-  left: 50%;
-  transform: translateX(-50%) scale(0.9);
-  padding: 20px 24px;
-  background: #fffefc;
-  color: #1a1a1a;
-  border: 2px solid #d6ccc2;
-  border-radius: 6px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-  line-height: 1.8;
-  font-size: 14px;
-  font-family: 'Special Elite', cursive;
-  max-width: 380px;
-  white-space: pre-wrap;
-  overflow-y: auto;
-  max-height: 320px;
-  opacity: 0;
-  transition: all 0.4s ease;
-  z-index: 4;
-}
-.paper.show {
-  display: block;
-  transform: translateX(-50%) scale(1);
-  opacity: 1;
 }
 
 .fullscreen-hint {
@@ -275,91 +255,15 @@ body {
 }
 
 @media (max-width: 768px) {
-  .letter-entry { justify-content: center !important; }
-  .animated-string { left: 50%; transform: translateX(-50%); width: 2px; opacity: 0.6; }
+  .letter-entry { flex-direction: column; gap: 80px; }
   .envelope { width: 220px; height: 120px; }
-  .paper { max-width: 90%; }
+  .paper {
+    left: 50%;
+    transform: translate(-50%, 0) scale(0.95);
+    max-width: 90%;
+    top: auto;
+    bottom: -60px;
+  }
+  .paper.fullscreen { max-width: 95%; padding: 20px; }
   .floating-quotes span { font-size: 12px; }
-}
-/* Add this below your existing styles or replace relevant parts */
-
-.letter-entry {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
-  width: 100%;
-}
-
-.envelope {
-  transition: transform 0.4s ease;
-}
-
-.envelope.open {
-  transform: translateX(-180px) scale(1.02) rotate(0deg);
-  z-index: 5;
-}
-
-.paper {
-  display: block;
-  position: absolute;
-  left: calc(50% + 180px);
-  top: 50%;
-  transform: translateY(-50%) scale(0.95);
-  padding: 24px 28px;
-  background: #fffefc;
-  color: #1a1a1a;
-  border: 2px solid #d6ccc2;
-  border-radius: 6px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-  font-family: 'Special Elite', 'Courier New', monospace;
-  font-size: 15px;
-  line-height: 1.7;
-  max-width: 380px;
-  max-height: 320px;
-  overflow-y: auto;
-  opacity: 0;
-  transition: all 0.4s ease;
-  z-index: 4;
-}
-
-.paper.show {
-  opacity: 1;
-  transform: translateY(-50%) scale(1);
-}
-
-.paper.fullscreen {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1.08);
-  width: 90%;
-  max-width: 700px;
-  max-height: 90vh;
-  padding: 30px;
-  z-index: 999;
-  font-size: 16px;
-  line-height: 1.9;
-}
-
-/* Optional blur background for fullscreen mode */
-.paper.fullscreen::before {
-  content: '';
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: -1;
-}
-
-/* Reset envelope when closed */
-.envelope.closed {
-  transform: rotate(-2deg);
-}
-
-/* Add transitions for paper z-index delay */
-.paper.fullscreen,
-.paper.show {
-  transition: all 0.4s ease, z-index 0s linear;
 }
