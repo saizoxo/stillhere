@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
 
-/* === RESET === */
 body {
   margin: 0;
   padding: 0;
@@ -11,7 +10,6 @@ body {
   overflow-y: auto;
 }
 
-/* === MUTE BUTTON === */
 .mute-button {
   position: fixed;
   top: 20px;
@@ -30,7 +28,6 @@ body {
   color: #0d0d0d;
 }
 
-/* === TIMELINE CONTAINER === */
 .letters-timeline {
   position: relative;
   padding: 100px 20px;
@@ -38,7 +35,6 @@ body {
   margin: 0 auto;
 }
 
-/* === CENTER STRING === */
 .animated-string {
   position: absolute;
   top: 0;
@@ -51,13 +47,11 @@ body {
   z-index: 1;
   opacity: 0.8;
 }
-
 @keyframes pulse {
   0% { background-position: 0 0; }
   100% { background-position: 0 100px; }
 }
 
-/* === LETTER LIST === */
 .letter-list {
   position: relative;
   z-index: 2;
@@ -68,13 +62,13 @@ body {
   align-items: center;
 }
 
-/* === EACH LETTER ENTRY === */
 .letter-entry {
   position: relative;
   display: flex;
   justify-content: center;
-  z-index: 2;
+  align-items: flex-start;
   width: 100%;
+  gap: 30px;
 }
 .letter-entry::before {
   content: '';
@@ -88,7 +82,15 @@ body {
   z-index: 0;
 }
 
-/* === ENVELOPE === */
+.letter-entry.left .paper {
+  order: 2;
+  margin-left: 20px;
+}
+.letter-entry.right .paper {
+  order: 1;
+  margin-right: 20px;
+}
+
 .envelope {
   position: relative;
   width: 260px;
@@ -105,9 +107,9 @@ body {
   text-align: center;
   cursor: pointer;
   transition: transform 0.3s ease;
-  overflow: hidden;
   transform: rotate(-2deg);
   z-index: 3;
+  overflow: hidden;
   animation: floatLeft 5s ease-in-out infinite;
 }
 .letter-entry.right .envelope {
@@ -115,39 +117,10 @@ body {
   animation: floatRight 5s ease-in-out infinite;
 }
 
-/* === FLAP TRIANGLE FOR STEP 2 === */
-.envelope.open::before {
-  content: '';
-  position: absolute;
-  top: -60px;
-  left: 0;
-  width: 100%;
-  height: 60px;
-  background-color: #d4d4d4;
-  clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
-  z-index: 2;
+.envelope:hover {
+  transform: scale(1.05) rotate(0deg);
 }
 
-/* === TAP TEXT ABOVE PAPER === */
-.tap-hint {
-  position: absolute;
-  top: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 13px;
-  font-family: 'Special Elite', monospace;
-  animation: floatHint 2.5s ease-in-out infinite;
-  pointer-events: none;
-  z-index: 5;
-}
-
-@keyframes floatHint {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(-5px); }
-}
-
-/* === PLACEHOLDER TEXT === */
 .envelope::after {
   content: attr(data-placeholder);
   position: absolute;
@@ -160,11 +133,7 @@ body {
   padding: 0 10px;
   pointer-events: none;
 }
-.envelope:hover {
-  transform: scale(1.05) rotate(0deg);
-}
 
-/* === FLOATING IDLE ANIMATION === */
 @keyframes floatLeft {
   0%, 100% { transform: translateY(0) rotate(-2deg); }
   50% { transform: translateY(-5px) rotate(0deg); }
@@ -174,32 +143,102 @@ body {
   50% { transform: translateY(5px) rotate(0deg); }
 }
 
-/* === LETTER MESSAGE (PAPER) === */
+.tap-hint {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+  font-family: 'Special Elite', monospace;
+  animation: floatHint 2.5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 5;
+}
+@keyframes floatHint {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-5px); }
+}
+
+.paper-slide {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 100%);
+  width: 90%;
+  height: auto;
+  background: #fffdf7;
+  border-radius: 4px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+  padding: 12px 16px;
+  font-family: 'Special Elite', monospace;
+  font-size: 14px;
+  color: #2e2e2e;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  opacity: 0;
+  z-index: 3;
+}
+.envelope.open .paper-slide {
+  transform: translate(-50%, 20%);
+  opacity: 1;
+}
+
+.envelope.open::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #d4d4d4;
+  clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
+  z-index: 2;
+}
+.envelope.open {
+  z-index: 4;
+  transform: scale(1.02) translateY(5px);
+}
+
 .paper {
-  margin-top: 20px;
-  padding: 20px;
+  display: none;
+  position: absolute;
+  bottom: -200px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  padding: 20px 24px;
   background: #fffefc;
   color: #1a1a1a;
   border: 2px solid #d6ccc2;
   border-radius: 6px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-  font-family: 'Special Elite', 'Courier New', monospace;
-  font-size: 15px;
-  line-height: 1.7;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  line-height: 1.8;
+  font-size: 14px;
+  font-family: 'Special Elite', cursive;
+  max-width: 380px;
+  white-space: pre-wrap;
+  overflow-y: auto;
+  max-height: 320px;
   opacity: 0;
-  transform: scale(0.8);
   transition: all 0.4s ease;
-  width: 100%;
-  max-width: 400px;
-  z-index: 5;
-  position: relative;
+  z-index: 4;
 }
 .paper.show {
+  display: block;
+  transform: translateX(-50%) scale(1);
   opacity: 1;
-  transform: scale(1);
 }
 
-/* === FLOATING QUOTES === */
+.fullscreen-hint {
+  position: absolute;
+  top: -25px;
+  right: 10px;
+  font-size: 12px;
+  color: #999;
+  opacity: 0.6;
+  font-style: italic;
+  font-family: 'Special Elite', monospace;
+}
+
 .floating-quotes {
   position: fixed;
   top: 0;
@@ -225,7 +264,6 @@ body {
   opacity: 0.2;
   animation: floatQuoteGlow 25s ease-in-out infinite;
 }
-
 @keyframes floatQuote {
   0% { transform: translateY(0) translateX(0); }
   50% { transform: translateY(-40px) translateX(10px); }
@@ -236,106 +274,10 @@ body {
   50% { transform: translateY(-30px); opacity: 0.3; }
 }
 
-/* === RESPONSIVE === */
 @media (max-width: 768px) {
   .letter-entry { justify-content: center !important; }
   .animated-string { left: 50%; transform: translateX(-50%); width: 2px; opacity: 0.6; }
   .envelope { width: 220px; height: 120px; }
   .paper { max-width: 90%; }
   .floating-quotes span { font-size: 12px; }
-}
-/* === STEP 2: MINI PAPER PREVIEW === */
-.paper-slide {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translate(-50%, 100%);
-  width: 90%;
-  height: auto;
-  background: #fffdf7;
-  border-radius: 4px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
-  padding: 12px 16px;
-  font-family: 'Special Elite', monospace;
-  font-size: 14px;
-  color: #2e2e2e;
-  transition: transform 0.4s ease, opacity 0.4s ease;
-  opacity: 0;
-  z-index: 3;
-}
-
-/* When envelope is opened (Step 2) */
-.envelope.open .paper-slide {
-  transform: translate(-50%, 20%);
-  opacity: 1;
-}
-
-/* Fullscreen hint inside paper */
-.fullscreen-hint {
-  position: absolute;
-  top: -25px;
-  right: 10px;
-  font-size: 12px;
-  color: #999;
-  opacity: 0.6;
-  font-style: italic;
-  font-family: 'Special Elite', monospace;
-}
-
-/* === OPTIONAL: Add this if needed for envelope open styling === */
-.envelope.open {
-  z-index: 2;
-  transform: scale(1.02) translateY(5px);
-}
-
-/* Extra polish for smoother transition */
-.envelope .paper-mini {
-  pointer-events: none;
-  user-select: none;
-}
-
-/*idk*/
-.letter-entry {
-  align-items: flex-start;
-  gap: 30px;
-}
-
-.letter-entry.left .paper {
-  order: 2;
-  margin-left: 20px;
-}
-
-.letter-entry.right .paper {
-  order: 1;
-  margin-right: 20px;
-}
-
-.envelope {
-  position: relative;
-  z-index: 2;
-}
-
-.paper {
-  display: none;
-  background: #fffefc;
-  color: #222;
-  padding: 20px 24px;
-  border-radius: 8px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-  line-height: 1.8;
-  font-size: 14px;
-  font-family: 'Special Elite', cursive;
-  max-width: 380px;
-  white-space: pre-wrap;
-  overflow-y: auto;
-  max-height: 320px;
-  transform: scale(0.9);
-  opacity: 0;
-  transition: all 0.4s ease;
-}
-
-.paper.show {
-  display: block;
-  transform: scale(1);
-  opacity: 1;
 }
