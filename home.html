@@ -10,11 +10,11 @@
   <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
 
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="css/style.css" /> <!-- Global styles -->
-  <link rel="stylesheet" href="css/home.css" />  <!-- Home-specific styles -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/home.css" />
 
   <!-- Scripts -->
-  <script src="js/home.js" defer></script> <!-- Handles letter interaction -->
+  <script src="js/home.js" defer></script>
 </head>
 
 <body class="unlocked">
@@ -27,27 +27,32 @@
     <div class="animated-string"></div>
 
     <div class="letter-list">
-      <!-- ✉️ 20 Placeholder Letters -->
-      <div class="letter-entry left"><div class="envelope" data-id="1">Letter 1</div></div>
-      <div class="letter-entry right"><div class="envelope" data-id="2">Letter 2</div></div>
-      <div class="letter-entry left"><div class="envelope" data-id="3">Letter 3</div></div>
-      <div class="letter-entry right"><div class="envelope" data-id="4">Letter 4</div></div>
-      <div class="letter-entry left"><div class="envelope" data-id="5">Letter 5</div></div>
-      <div class="letter-entry right"><div class="envelope" data-id="6">Letter 6</div></div>
-      <div class="letter-entry left"><div class="envelope" data-id="7">Letter 7</div></div>
-      <div class="letter-entry right"><div class="envelope" data-id="8">Letter 8</div></div>
-      <div class="letter-entry left"><div class="envelope" data-id="9">Letter 9</div></div>
-      <div class="letter-entry right"><div class="envelope" data-id="10">Letter 10</div></div>
-      <div class="letter-entry left"><div class="envelope" data-id="11">Letter 11</div></div>
-      <div class="letter-entry right"><div class="envelope" data-id="12">Letter 12</div></div>
-      <div class="letter-entry left"><div class="envelope" data-id="13">Letter 13</div></div>
-      <div class="letter-entry right"><div class="envelope" data-id="14">Letter 14</div></div>
-      <div class="letter-entry left"><div class="envelope" data-id="15">Letter 15</div></div>
-      <div class="letter-entry right"><div class="envelope" data-id="16">Letter 16</div></div>
-      <div class="letter-entry left"><div class="envelope" data-id="17">Letter 17</div></div>
-      <div class="letter-entry right"><div class="envelope" data-id="18">Letter 18</div></div>
-      <div class="letter-entry left"><div class="envelope" data-id="19">Letter 19</div></div>
-      <div class="letter-entry right"><div class="envelope" data-id="20">Letter 20</div></div>
+      <!-- ✉️ 20 Hanging Letters -->
+      <!-- Use data-placeholder for front text (e.g. "Open when you're sad") -->
+      <!-- You can dynamically change these texts or content via JS later -->
+
+      <!-- Looping through 1 to 20 -->
+      <!-- Left Side Letters -->
+      <div class="letter-entry left"><div class="envelope" data-id="1" data-placeholder="open when you're sad"></div></div>
+      <div class="letter-entry right"><div class="envelope" data-id="2" data-placeholder="read when you miss me"></div></div>
+      <div class="letter-entry left"><div class="envelope" data-id="3" data-placeholder="remember this?"></div></div>
+      <div class="letter-entry right"><div class="envelope" data-id="4" data-placeholder="when you need a smile"></div></div>
+      <div class="letter-entry left"><div class="envelope" data-id="5" data-placeholder="when you can't sleep"></div></div>
+      <div class="letter-entry right"><div class="envelope" data-id="6" data-placeholder="i wrote this for you"></div></div>
+      <div class="letter-entry left"><div class="envelope" data-id="7" data-placeholder="when life gets tough"></div></div>
+      <div class="letter-entry right"><div class="envelope" data-id="8" data-placeholder="the silly letter"></div></div>
+      <div class="letter-entry left"><div class="envelope" data-id="9" data-placeholder="💌"></div></div>
+      <div class="letter-entry right"><div class="envelope" data-id="10" data-placeholder="nostalgia trip"></div></div>
+      <div class="letter-entry left"><div class="envelope" data-id="11" data-placeholder="when you're angry"></div></div>
+      <div class="letter-entry right"><div class="envelope" data-id="12" data-placeholder="a tiny surprise"></div></div>
+      <div class="letter-entry left"><div class="envelope" data-id="13" data-placeholder="just because"></div></div>
+      <div class="letter-entry right"><div class="envelope" data-id="14" data-placeholder="secret memory"></div></div>
+      <div class="letter-entry left"><div class="envelope" data-id="15" data-placeholder="open me slowly"></div></div>
+      <div class="letter-entry right"><div class="envelope" data-id="16" data-placeholder="because i care"></div></div>
+      <div class="letter-entry left"><div class="envelope" data-id="17" data-placeholder="read this at night"></div></div>
+      <div class="letter-entry right"><div class="envelope" data-id="18" data-placeholder="shhh… it's a secret"></div></div>
+      <div class="letter-entry left"><div class="envelope" data-id="19" data-placeholder="when you're curious"></div></div>
+      <div class="letter-entry right"><div class="envelope" data-id="20" data-placeholder="one last note"></div></div>
     </div>
   </div>
 </body>
