@@ -4,13 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>still here</title>
+
+  <!-- Styles -->
   <link rel="stylesheet" href="css/style.css" />
-  <script defer src="js/particles.js"></script>
-  <script defer src="js/versus.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
+  <script src="js/particles.js" defer></script>
+  <script src="js/script.js" defer></script>
 </head>
+
 <body class="unlocked">
+  <!-- 🌀 Particles Background -->
   <div id="particles-js"></div>
 
+  <!-- 🔊 Mute/Unmute Toggle -->
+  <button id="mute-btn" class="mute-button">mute</button>
+
+  <!-- 🔐 Main Content -->
   <div class="vault-container">
     <h1 class="vault-heading">i’m still here jaana</h1>
     <p class="vault-subtext">in your heart, in every version of you</p>
@@ -34,7 +47,7 @@
     <p class="vault-footer">made with 💜 by your sonpapda</p>
   </div>
 
-  <audio id="bg-audio" src="assets/bg-music.mp3" autoplay loop></audio>
-  <button id="mute-btn" class="mute-button">mute</button>
+  <!-- 🎶 Background Music -->
+  <audio id="bgMusic" src="assets/bg-music.mp3" autoplay loop></audio>
 </body>
 </html>
