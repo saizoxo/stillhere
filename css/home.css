@@ -244,3 +244,52 @@ body {
   .paper { max-width: 90%; }
   .floating-quotes span { font-size: 12px; }
 }
+/* === STEP 2: MINI PAPER PREVIEW === */
+.paper-slide {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 100%);
+  width: 90%;
+  height: auto;
+  background: #fffdf7;
+  border-radius: 4px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+  padding: 12px 16px;
+  font-family: 'Special Elite', monospace;
+  font-size: 14px;
+  color: #2e2e2e;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  opacity: 0;
+  z-index: 3;
+}
+
+/* When envelope is opened (Step 2) */
+.envelope.open .paper-slide {
+  transform: translate(-50%, 20%);
+  opacity: 1;
+}
+
+/* Fullscreen hint inside paper */
+.fullscreen-hint {
+  position: absolute;
+  top: -25px;
+  right: 10px;
+  font-size: 12px;
+  color: #999;
+  opacity: 0.6;
+  font-style: italic;
+  font-family: 'Special Elite', monospace;
+}
+
+/* === OPTIONAL: Add this if needed for envelope open styling === */
+.envelope.open {
+  z-index: 2;
+  transform: scale(1.02) translateY(5px);
+}
+
+/* Extra polish for smoother transition */
+.envelope .paper-mini {
+  pointer-events: none;
+  user-select: none;
+}
