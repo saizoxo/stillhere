@@ -32,11 +32,11 @@ body {
 .letters-timeline {
   position: relative;
   padding: 100px 20px;
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
-/* === ANIMATED STRING === */
+/* === CENTER STRING === */
 .animated-string {
   position: absolute;
   top: 0;
@@ -61,7 +61,7 @@ body {
   100% { background-position: 0 100px; }
 }
 
-/* === LETTER STRUCTURE === */
+/* === LETTER LIST === */
 .letter-list {
   position: relative;
   z-index: 2;
@@ -69,34 +69,32 @@ body {
   flex-direction: column;
   gap: 140px;
   padding-bottom: 200px;
-}
-
-.letter-entry {
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  position: relative;
-  z-index: 2;
-}
-.letter-entry.left {
-  align-items: flex-start;
-}
-.letter-entry.right {
-  align-items: flex-end;
 }
 
-/* === HANGING STRING CONNECTOR === */
+/* === EACH LETTER ENTRY === */
+.letter-entry {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  z-index: 2;
+  width: 100%;
+}
+
+/* === CONNECTOR STRING TO ENVELOPE === */
 .letter-entry::before {
   content: '';
   position: absolute;
-  top: 0;
-  height: 100px;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 2px;
+  height: 100px;
   background-color: #ff4e50;
-  z-index: 1;
+  z-index: 0;
 }
 
-/* === ENVELOPE (Closed) === */
+/* === ENVELOPE === */
 .envelope {
   position: relative;
   width: 260px;
@@ -117,12 +115,11 @@ body {
   transform: rotate(-2deg);
   z-index: 3;
 }
-
-.envelope.right {
+.letter-entry.right .envelope {
   transform: rotate(2deg);
 }
 
-/* Triangle flap (Top-down) */
+/* === FLAP === */
 .envelope::before {
   content: '';
   position: absolute;
@@ -135,7 +132,7 @@ body {
   z-index: 2;
 }
 
-/* Placeholder message on back */
+/* === PLACEHOLDER TEXT === */
 .envelope::after {
   content: attr(data-placeholder);
   position: absolute;
@@ -149,12 +146,12 @@ body {
   pointer-events: none;
 }
 
-/* Hover Effect */
+/* === ENVELOPE HOVER === */
 .envelope:hover {
   transform: scale(1.05) rotate(0deg);
 }
 
-/* === PAPER MESSAGE === */
+/* === LETTER MESSAGE === */
 .paper {
   margin-top: 20px;
   padding: 20px;
@@ -179,17 +176,16 @@ body {
   transform: scale(1);
 }
 
-/* === RESPONSIVE TWEAKS === */
+/* === RESPONSIVE === */
 @media (max-width: 768px) {
   .letter-entry {
-    align-items: center !important;
+    justify-content: center !important;
   }
 
   .animated-string {
-    display: block;
+    left: 50%;
+    transform: translateX(-50%);
     width: 2px;
-    left: 8%;
-    transform: translateX(0);
     opacity: 0.6;
   }
 
