@@ -4,20 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>still here</title>
-
-  <!-- Fonts & Favicon -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet" />
-  <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
-
-  <!-- Stylesheets -->
   <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/home.css" />
-
-  <!-- Scripts -->
-  <script src="js/home.js" defer></script>
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
 </head>
-
 <body class="unlocked">
+
   <!-- 🎵 Background Music -->
   <audio id="bgMusic" src="assets/bg-music.mp3" autoplay loop></audio>
   <button id="mute-btn" class="mute-button">mute</button>
@@ -25,61 +17,48 @@
   <!-- 💌 Letters Timeline -->
   <div class="letters-timeline">
     <div class="animated-string"></div>
-
     <div class="letter-list">
-      <!-- 🔁 20 Hanging Letters -->
-      <!-- REPEAT THIS BLOCK FOR EACH LETTER -->
-      <!-- Example for 20 letters below -->
-      <!-- Fake paper + message + fullscreen hint are now included -->
-      <!-- You can customize each data-placeholder or data-id -->
-
-      <!-- Loop Start -->
-      <!-- You can automate this with JS later if needed -->
-      <!-- Use "left" and "right" alternately -->
-      <div class="letter-entry left">
-        <div class="envelope" data-id="1" data-placeholder="open when you're sad">
-          <div class="fake-paper">tap to open</div>
-        </div>
-        <div class="paper">
-          <div class="fullscreen-hint">click to full screen</div>
-          <p>Your real letter message goes here. You can replace this content with the actual note for this envelope.</p>
-        </div>
-      </div>
-
-      <div class="letter-entry right">
-        <div class="envelope" data-id="2" data-placeholder="read when you miss me">
-          <div class="fake-paper">tap to open</div>
-        </div>
-        <div class="paper">
-          <div class="fullscreen-hint">click to full screen</div>
-          <p>Another message, personalized just for you.</p>
-        </div>
-      </div>
-
-      <!-- Repeat for all remaining 18 envelopes -->
-      <!-- You can copy and paste above two blocks, alternating left/right -->
-      <!-- Use different data-id and placeholder -->
-      
-      <!-- ... Continue until 20 ... -->
-
+      <!-- Looping 20 Letters -->
+      <div class="letter-entry left"><div class="envelope" data-placeholder="open when you're sad">💌</div></div>
+      <div class="letter-entry right"><div class="envelope" data-placeholder="read when you miss me">💌</div></div>
+      <div class="letter-entry left"><div class="envelope" data-placeholder="remember this?">💌</div></div>
+      <div class="letter-entry right"><div class="envelope" data-placeholder="when you need a smile">💌</div></div>
+      <div class="letter-entry left"><div class="envelope" data-placeholder="when you can't sleep">💌</div></div>
+      <div class="letter-entry right"><div class="envelope" data-placeholder="i wrote this for you">💌</div></div>
+      <div class="letter-entry left"><div class="envelope" data-placeholder="when life gets tough">💌</div></div>
+      <div class="letter-entry right"><div class="envelope" data-placeholder="the silly letter">💌</div></div>
+      <div class="letter-entry left"><div class="envelope" data-placeholder="💌">💌</div></div>
+      <div class="letter-entry right"><div class="envelope" data-placeholder="nostalgia trip">💌</div></div>
+      <div class="letter-entry left"><div class="envelope" data-placeholder="when you're angry">💌</div></div>
+      <div class="letter-entry right"><div class="envelope" data-placeholder="a tiny surprise">💌</div></div>
+      <div class="letter-entry left"><div class="envelope" data-placeholder="just because">💌</div></div>
+      <div class="letter-entry right"><div class="envelope" data-placeholder="secret memory">💌</div></div>
+      <div class="letter-entry left"><div class="envelope" data-placeholder="open me slowly">💌</div></div>
+      <div class="letter-entry right"><div class="envelope" data-placeholder="because i care">💌</div></div>
+      <div class="letter-entry left"><div class="envelope" data-placeholder="read this at night">💌</div></div>
+      <div class="letter-entry right"><div class="envelope" data-placeholder="shhh… it's a secret">💌</div></div>
+      <div class="letter-entry left"><div class="envelope" data-placeholder="when you're curious">💌</div></div>
+      <div class="letter-entry right"><div class="envelope" data-placeholder="one last note">💌</div></div>
     </div>
   </div>
 
   <!-- 💬 Floating Quotes -->
   <div class="floating-quotes">
-    <span style="--i:1">I love you, jaana</span>
-    <span style="--i:2">I love you more, jaana. I love you more</span>
-    <span style="--i:3">You are my kucha-pucha</span>
-    <span style="--i:4">For me, you are my inni si pookie</span>
-    <span style="--i:5">I accept</span>
-    <span style="--i:6">You are a blessing, jaana. You are a blessing</span>
-    <span style="--i:7">Good morning, jaana</span>
-    <span style="--i:8">I don’t like to say bye</span>
-    <span style="--i:9">Go now, or else I won’t be able to send you</span>
-    <span style="--i:10">I’m craving heart for you, jaana</span>
-    <span style="--i:11">I will always be yours</span>
-    <span style="--i:12">You are mine. I am yours. It’s as simple as that</span>
-    <span class="glow" style="--i:13">I love you, Shreya</span>
+    <span style="--i:1; --j:1">I love you, jaana</span>
+    <span style="--i:2; --j:2">I love you more, jaana. I love you more</span>
+    <span style="--i:3; --j:3">You are my kucha-pucha</span>
+    <span style="--i:4; --j:4">For me, you are my inni si pookie</span>
+    <span style="--i:5; --j:5">I accept</span>
+    <span style="--i:6; --j:6">You are a blessing, jaana</span>
+    <span style="--i:7; --j:7">Good morning, jaana</span>
+    <span style="--i:8; --j:8">I don’t like to say bye</span>
+    <span style="--i:9; --j:9">Go now, or else I won’t be able to send you</span>
+    <span style="--i:10; --j:10">I’m craving heart for you, jaana</span>
+    <span style="--i:11; --j:11">I will always be yours</span>
+    <span style="--i:12; --j:12">You are mine. I am yours. It’s as simple as that</span>
+    <span class="glow" style="--i:13; --j:13">I love you, Shreya</span>
   </div>
+
+  <script src="js/home.js"></script>
 </body>
 </html>
