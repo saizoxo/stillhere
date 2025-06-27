@@ -67,20 +67,23 @@ body {
   z-index: 2;
   display: flex;
   flex-direction: column;
-  gap: 140px; /* More space to prevent overlapping */
+  gap: 140px;
   padding-bottom: 200px;
 }
 
 /* === ENTRY ALIGNMENTS === */
 .letter-entry {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   position: relative;
+  z-index: 2;
 }
 .letter-entry.left {
-  justify-content: flex-start;
+  align-items: flex-start;
 }
 .letter-entry.right {
-  justify-content: flex-end;
+  align-items: flex-end;
 }
 
 /* === ENVELOPE STYLING === */
@@ -100,16 +103,18 @@ body {
   text-align: center;
   cursor: pointer;
   transition: transform 0.3s ease;
-  overflow: hidden;
+  overflow: visible;
+  z-index: 3;
 }
 .envelope::before {
   content: '';
   position: absolute;
-  top: 0;
+  bottom: 100%;
   left: 0;
-  border-left: 130px solid transparent;
-  border-right: 130px solid transparent;
-  border-bottom: 70px solid #d4d4d4;
+  width: 100%;
+  height: 60px;
+  background-color: #d4d4d4;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
   z-index: 2;
 }
 .envelope:hover {
@@ -133,7 +138,7 @@ body {
   transition: all 0.4s ease;
   width: 100%;
   max-width: 360px;
-  z-index: 2;
+  z-index: 1;
   position: relative;
 }
 .paper.show {
@@ -144,13 +149,13 @@ body {
 /* === RESPONSIVE === */
 @media (max-width: 768px) {
   .letter-entry {
-    justify-content: center !important;
+    align-items: center !important;
   }
 
   .animated-string {
     display: block;
     width: 2px;
-    left: 10%;
+    left: 8%;
     transform: translateX(0);
     opacity: 0.6;
   }
