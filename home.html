@@ -6,7 +6,7 @@
   <title>still here</title>
 
   <!-- Fonts & Favicon -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet" />
   <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
 
   <!-- Stylesheets -->
@@ -15,6 +15,98 @@
 
   <!-- Scripts -->
   <script src="js/home.js" defer></script>
+  <style>
+    body {
+      font-family: 'Special Elite', cursive;
+      background: url('assets/bg.jpg') no-repeat center center fixed;
+      background-size: cover;
+      backdrop-filter: blur(4px);
+      overflow-x: hidden;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .letter-entry {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      margin-bottom: 180px;
+    }
+
+    .letter-entry.left .envelope {
+      animation: floatLeft 5s ease-in-out infinite;
+    }
+
+    .letter-entry.right .envelope {
+      animation: floatRight 5s ease-in-out infinite;
+    }
+
+    .envelope {
+      background: #fdfdfd;
+      color: #222;
+      border-radius: 10px;
+      padding: 20px;
+      width: 280px;
+      box-shadow: 0 5px 30px rgba(0,0,0,0.5);
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .envelope:hover {
+      transform: scale(1.05);
+    }
+
+    .paper-slide {
+      display: none;
+      font-size: 12px;
+      color: #888;
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    .paper-mini {
+      font-weight: bold;
+      color: #444;
+      font-size: 15px;
+      margin-top: 4px;
+    }
+
+    .paper {
+      background: #fffefc;
+      color: #222;
+      margin-top: 20px;
+      padding: 18px 20px;
+      border-radius: 8px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      max-width: 420px;
+      width: fit-content;
+      line-height: 1.6;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      transform: scale(0.8);
+      opacity: 0;
+      font-size: 15px;
+      font-family: 'Special Elite', cursive;
+    }
+
+    .paper.show {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    @keyframes floatLeft {
+      0%, 100% { transform: translateX(0px); }
+      50% { transform: translateX(-10px); }
+    }
+
+    @keyframes floatRight {
+      0%, 100% { transform: translateX(0px); }
+      50% { transform: translateX(10px); }
+    }
+  </style>
 </head>
 <body class="unlocked">
 
@@ -24,7 +116,6 @@
 
   <!-- 💌 Letters Timeline -->
   <div class="letters-timeline">
-    <div class="animated-string"></div>
     <div class="letter-list">
 
       <!-- ✉️ Letter 1 -->
@@ -100,21 +191,5 @@
     </div>
   </div>
 
-  <!-- 💬 Floating Quotes -->
-  <div class="floating-quotes">
-    <span style="top: 10%; left: 5%;">I love you, jaana</span>
-    <span style="top: 20%; left: 60%;">I love you more, jaana. I love you more</span>
-    <span style="top: 35%; left: 20%;">You are my kucha-pucha</span>
-    <span style="top: 50%; left: 75%;">For me, you are my inni si pookie</span>
-    <span style="top: 65%; left: 10%;">I accept</span>
-    <span style="top: 80%; left: 50%;">You are a blessing, jaana. You are a blessing</span>
-    <span style="top: 5%; left: 70%;">Good morning, jaana</span>
-    <span style="top: 25%; left: 35%;">I don’t like to say bye</span>
-    <span style="top: 45%; left: 85%;">Go now, or else I won’t be able to send you</span>
-    <span style="top: 60%; left: 40%;">I’m craving heart for you, jaana</span>
-    <span style="top: 72%; left: 25%;">I will always be yours</span>
-    <span style="top: 85%; left: 75%;">You are mine. I am yours. It’s as simple as that</span>
-    <span class="glow" style="top: 15%; left: 85%;">I love you, Shreya</span>
-  </div>
 </body>
 </html>
