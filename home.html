@@ -28,26 +28,40 @@
 
     <div class="letter-list">
       <!-- 🔁 20 Hanging Letters -->
-      <div class="letter-entry left"><div class="envelope" data-id="1" data-placeholder="open when you're sad"></div></div>
-      <div class="letter-entry right"><div class="envelope" data-id="2" data-placeholder="read when you miss me"></div></div>
-      <div class="letter-entry left"><div class="envelope" data-id="3" data-placeholder="remember this?"></div></div>
-      <div class="letter-entry right"><div class="envelope" data-id="4" data-placeholder="when you need a smile"></div></div>
-      <div class="letter-entry left"><div class="envelope" data-id="5" data-placeholder="when you can't sleep"></div></div>
-      <div class="letter-entry right"><div class="envelope" data-id="6" data-placeholder="i wrote this for you"></div></div>
-      <div class="letter-entry left"><div class="envelope" data-id="7" data-placeholder="when life gets tough"></div></div>
-      <div class="letter-entry right"><div class="envelope" data-id="8" data-placeholder="the silly letter"></div></div>
-      <div class="letter-entry left"><div class="envelope" data-id="9" data-placeholder="💌"></div></div>
-      <div class="letter-entry right"><div class="envelope" data-id="10" data-placeholder="nostalgia trip"></div></div>
-      <div class="letter-entry left"><div class="envelope" data-id="11" data-placeholder="when you're angry"></div></div>
-      <div class="letter-entry right"><div class="envelope" data-id="12" data-placeholder="a tiny surprise"></div></div>
-      <div class="letter-entry left"><div class="envelope" data-id="13" data-placeholder="just because"></div></div>
-      <div class="letter-entry right"><div class="envelope" data-id="14" data-placeholder="secret memory"></div></div>
-      <div class="letter-entry left"><div class="envelope" data-id="15" data-placeholder="open me slowly"></div></div>
-      <div class="letter-entry right"><div class="envelope" data-id="16" data-placeholder="because i care"></div></div>
-      <div class="letter-entry left"><div class="envelope" data-id="17" data-placeholder="read this at night"></div></div>
-      <div class="letter-entry right"><div class="envelope" data-id="18" data-placeholder="shhh… it's a secret"></div></div>
-      <div class="letter-entry left"><div class="envelope" data-id="19" data-placeholder="when you're curious"></div></div>
-      <div class="letter-entry right"><div class="envelope" data-id="20" data-placeholder="one last note"></div></div>
+      <!-- REPEAT THIS BLOCK FOR EACH LETTER -->
+      <!-- Example for 20 letters below -->
+      <!-- Fake paper + message + fullscreen hint are now included -->
+      <!-- You can customize each data-placeholder or data-id -->
+
+      <!-- Loop Start -->
+      <!-- You can automate this with JS later if needed -->
+      <!-- Use "left" and "right" alternately -->
+      <div class="letter-entry left">
+        <div class="envelope" data-id="1" data-placeholder="open when you're sad">
+          <div class="fake-paper">tap to open</div>
+        </div>
+        <div class="paper">
+          <div class="fullscreen-hint">click to full screen</div>
+          <p>Your real letter message goes here. You can replace this content with the actual note for this envelope.</p>
+        </div>
+      </div>
+
+      <div class="letter-entry right">
+        <div class="envelope" data-id="2" data-placeholder="read when you miss me">
+          <div class="fake-paper">tap to open</div>
+        </div>
+        <div class="paper">
+          <div class="fullscreen-hint">click to full screen</div>
+          <p>Another message, personalized just for you.</p>
+        </div>
+      </div>
+
+      <!-- Repeat for all remaining 18 envelopes -->
+      <!-- You can copy and paste above two blocks, alternating left/right -->
+      <!-- Use different data-id and placeholder -->
+      
+      <!-- ... Continue until 20 ... -->
+
     </div>
   </div>
 
