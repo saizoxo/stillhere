@@ -19,57 +19,17 @@ unlockBtn?.addEventListener("click", validatePassword);
 muteBtn?.addEventListener("click", toggleMusic);
 window.addEventListener("load", handleAutoplay);
 
-// ===== 3D TILT MAGIC =====
-function apply3DTilt(box) {
-  if (!box) return;
+if (loginBox) {
+  // Mouse events
+  loginBox.addEventListener("mousemove", handleTilt);
+  loginBox.addEventListener("mouseleave", resetTilt);
 
-  // Mouse Movement
-  box.addEventListener("mousemove", e => {
-    const rect = box.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    const rotateX = ((y - centerY) / centerY) * -10;
-    const rotateY = ((x - centerX) / centerX) * 10;
-
-    box.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
-    box.style.transition = "transform 0.1s ease";
-  });
-
-  box.addEventListener("mouseleave", () => {
-    box.style.transform = "perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)";
-    box.style.transition = "transform 0.6s ease";
-  });
-
-  // Touch Movement
-  box.addEventListener("touchmove", e => {
-    const touch = e.touches[0];
-    const rect = box.getBoundingClientRect();
-    const x = touch.clientX - rect.left;
-    const y = touch.clientY - rect.top;
-
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    const rotateX = ((y - centerY) / centerY) * -10;
-    const rotateY = ((x - centerX) / centerX) * 10;
-
-    box.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
-    box.style.transition = "transform 0.1s ease";
-  });
-
-  box.addEventListener("touchend", () => {
-    box.style.transform = "perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)";
-    box.style.transition = "transform 0.6s ease";
-  });
+  // Touch events
+  loginBox.addEventListener("touchmove", handleTiltTouch);
+  loginBox.addEventListener("touchend", resetTilt);
 }
 
-apply3DTilt(loginBox);
-
-// ===== LOGIC =====
+// ====== FUNCTIONS ======
 
 // 🔐 Validate Password
 function validatePassword() {
@@ -94,7 +54,7 @@ function onLoginSuccess() {
   });
 }
 
-// 🌀 Fade Out
+// 🌀 Fade Out Only the Login UI (not particles)
 function fadeOut(callback) {
   if (!container) return callback();
   container.style.transition = "opacity 1.2s ease";
@@ -113,13 +73,13 @@ function toggleMusic() {
   }
 }
 
-// 💬 Show Error
+// 💬 Show Error Message
 function showError(message) {
   errorMsg.textContent = message;
   errorMsg.style.opacity = 1;
 }
 
-// 🎧 Autoplay Handler
+// 🎧 Handle Autoplay on Load
 function handleAutoplay() {
   try {
     bgMusic.play().catch(() => {
@@ -128,4 +88,34 @@ function handleAutoplay() {
   } catch (err) {
     console.error("Audio failed to load:", err);
   }
+}
+
+// 🧠 Tilt Effect (Mouse)
+function handleTilt(e) {
+  const { width, height, left, top } = loginBox.getBoundingClientRect();
+  const x = e.clientX - left;
+  const y = e.clientY - top;
+
+  const rotateX = ((y / height) - 0.5) * -20;
+  const rotateY = ((x / width) - 0.5) * 20;
+
+  loginBox.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+}
+
+// 🧠 Tilt Effect (Touch)
+function handleTiltTouch(e) {
+  const touch = e.touches[0];
+  const { width, height, left, top } = loginBox.getBoundingClientRect();
+  const x = touch.clientX - left;
+  const y = touch.clientY - top;
+
+  const rotateX = ((y / height) - 0.5) * -20;
+  const rotateY = ((x / width) - 0.5) * 20;
+
+  loginBox.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+}
+
+// 🔁 Reset Tilt
+function resetTilt() {
+  loginBox.style.transform = "rotateX(0deg) rotateY(0deg)";
 }
