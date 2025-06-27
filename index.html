@@ -48,18 +48,12 @@
 
   <!-- 🔧 Scripts -->
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-
-  <!-- 🌌 Inline Particle Config -->
+  
+  <!-- 🌌 Inline Particle Config (no JSON) -->
   <script>
     particlesJS("particles-js", {
       "particles": {
-        "number": {
-          "value": 90,
-          "density": {
-            "enable": true,
-            "value_area": 800
-          }
-        },
+        "number": { "value": 90, "density": { "enable": true, "value_area": 800 } },
         "color": { "value": "#ffffff" },
         "shape": {
           "type": "circle",
@@ -106,7 +100,7 @@
           "resize": true
         },
         "modes": {
-          "grab": { "distance": 140, "line_linked": { "opacity": 0.5 }},
+          "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } },
           "bubble": { "distance": 200, "size": 5, "duration": 2, "opacity": 0.3, "speed": 2 },
           "repulse": { "distance": 100, "duration": 0.4 },
           "push": { "particles_nb": 4 },
@@ -117,7 +111,7 @@
     });
   </script>
 
-  <!-- 🔐 Main Script -->
+  <!-- 🔐 Main Logic -->
   <script src="js/script.js" defer></script>
 </body>
 </html>
