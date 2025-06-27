@@ -12,6 +12,7 @@ html, body {
   overflow: hidden;
   position: relative;
   color: #ffffff;
+  touch-action: manipulation;
 }
 
 /* 🌌 Particle Background */
@@ -34,8 +35,8 @@ html, body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  perspective: 800px;
-  perspective-origin: center;
+  perspective: 1200px;
+  perspective-origin: 50% 50%;
 }
 
 /* 🔊 Audio Button Styling */
@@ -58,7 +59,7 @@ html, body {
   font-weight: 600;
   color: #fff;
   text-transform: uppercase;
-  transition: 0.3s;
+  transition: 0.3s ease all;
   box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
 }
 
@@ -79,10 +80,10 @@ html, body {
   text-align: center;
   width: 90%;
   max-width: 400px;
-  animation: fadeIn 1s ease forwards;
+  animation: fadeIn 0.8s ease forwards;
   transform-style: preserve-3d;
   will-change: transform;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease-in-out;
 }
 
 /* 📝 Title */
