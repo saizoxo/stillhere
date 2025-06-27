@@ -133,7 +133,7 @@ body {
   z-index: 6;
 }
 
-/* PAPER PREVIEW */
+/* PAPER STAGE (Step 2) */
 .paper {
   display: block;
   position: absolute;
@@ -163,39 +163,24 @@ body {
   pointer-events: auto;
 }
 
-/* BLUR PREVIEW EFFECT */
-.paper.show::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(7px);
-  background: rgba(255, 255, 255, 0.25);
-  z-index: 1;
-  pointer-events: none;
-  transition: opacity 0.4s ease;
-}
-
-/* TAP TO FULLSCREEN LABEL */
+/* TAP TO OPEN FULLY HINT */
 .paper.show::after {
-  content: 'Tap to Fullscreen';
+  content: 'Tap to open fully';
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #222;
-  font-size: 14px;
-  background: rgba(255,255,255,0.7);
-  padding: 8px 16px;
-  border-radius: 8px;
-  z-index: 2;
+  top: 10px;
+  right: 10px;
+  font-size: 12px;
+  font-style: italic;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 4px 10px;
+  border-radius: 6px;
+  color: #444;
   font-family: 'Special Elite', monospace;
+  z-index: 10;
   pointer-events: none;
-  text-shadow: 0 0 2px rgba(0,0,0,0.1);
 }
 
-/* FULLSCREEN PAPER */
+/* FULLSCREEN STAGE */
 .paper.fullscreen {
   position: fixed;
   top: 50%;
@@ -210,9 +195,18 @@ body {
   z-index: 999;
   pointer-events: auto;
 }
-.paper.fullscreen::before,
 .paper.fullscreen::after {
   display: none;
+}
+.paper.fullscreen::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: -1;
 }
 
 .tap-hint {
