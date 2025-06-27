@@ -18,8 +18,7 @@ html, body {
 /* 🌌 Particle Background */
 #particles-js {
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   z-index: 0;
@@ -36,7 +35,8 @@ html, body {
   justify-content: center;
   flex-direction: column;
   perspective: 1200px;
-  perspective-origin: 50% 50%;
+  perspective-origin: center;
+  animation: fadeInContainer 1.2s ease forwards;
 }
 
 /* 🔊 Audio Button Styling */
@@ -47,9 +47,7 @@ html, body {
   z-index: 2;
 }
 
-#audio-toggle,
-#audio-toggle button,
-#audio-toggle #mute-btn {
+.audio-toggle button {
   all: unset;
   cursor: pointer;
   background: rgba(255, 255, 255, 0.1);
@@ -59,11 +57,11 @@ html, body {
   font-weight: 600;
   color: #fff;
   text-transform: uppercase;
-  transition: 0.3s ease all;
+  transition: all 0.3s ease;
   box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
 }
 
-#audio-toggle #mute-btn:hover {
+.audio-toggle button:hover {
   background: #ffffff;
   color: #0d0d0d;
   box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
@@ -80,10 +78,11 @@ html, body {
   text-align: center;
   width: 90%;
   max-width: 400px;
-  animation: fadeIn 0.8s ease forwards;
   transform-style: preserve-3d;
   will-change: transform;
   transition: transform 0.2s ease-in-out;
+  opacity: 0;
+  animation: fadeInLogin 1s ease forwards 0.5s;
 }
 
 /* 📝 Title */
@@ -137,12 +136,33 @@ html, body {
   height: 18px;
   margin-top: 12px;
   text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#error-msg.show {
+  opacity: 1;
 }
 
 /* ✨ Animations */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes fadeInLogin {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeInContainer {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* 🔐 Vault Styling (Home.html) */
@@ -158,7 +178,7 @@ html, body {
   text-align: center;
   backdrop-filter: blur(8px);
   box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-  animation: fadeIn 1.2s ease forwards;
+  animation: fadeInContainer 1.2s ease forwards;
 }
 
 .vault-heading {
