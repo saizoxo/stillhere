@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
 
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Courier Prime', monospace;
   background: #0d0d0d;
   color: #fff;
   overflow-x: hidden;
@@ -82,7 +83,6 @@ body {
   z-index: 0;
 }
 
-/* ENVELOPE STAGE */
 .envelope {
   position: relative;
   width: 260px;
@@ -133,7 +133,6 @@ body {
   z-index: 6;
 }
 
-/* PAPER STAGE (Step 2 - Preview) */
 .paper {
   display: block;
   position: absolute;
@@ -146,7 +145,7 @@ body {
   border: 2px solid #d6ccc2;
   border-radius: 8px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-  font-family: 'Special Elite', monospace;
+  font-family: 'Courier Prime', monospace;
   font-size: 16px;
   line-height: 1.8;
   max-width: 440px;
@@ -162,8 +161,6 @@ body {
   transform: translateY(-50%) scale(1);
   pointer-events: auto;
 }
-
-/* TAP TO OPEN FULLY HINT */
 .paper.show::after {
   content: 'Tap to open fully';
   position: absolute;
@@ -180,7 +177,6 @@ body {
   pointer-events: none;
 }
 
-/* FULLSCREEN STAGE */
 .paper.fullscreen {
   position: fixed;
   top: 50%;
@@ -207,6 +203,13 @@ body {
   height: 100vh;
   background: rgba(0, 0, 0, 0.6);
   z-index: -1;
+}
+
+/* FINAL PARAGRAPH — handwritten style */
+.paper p:last-of-type {
+  font-family: 'Special Elite', monospace;
+  font-size: 17px;
+  font-style: italic;
 }
 
 .tap-hint {
