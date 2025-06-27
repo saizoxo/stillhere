@@ -1,4 +1,6 @@
 /* === RESET === */
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+
 body {
   margin: 0;
   padding: 0;
@@ -114,9 +116,11 @@ body {
   overflow: hidden;
   transform: rotate(-2deg);
   z-index: 3;
+  animation: floatLeft 5s ease-in-out infinite;
 }
 .letter-entry.right .envelope {
   transform: rotate(2deg);
+  animation: floatRight 5s ease-in-out infinite;
 }
 
 /* === FLAP === */
@@ -151,21 +155,29 @@ body {
   transform: scale(1.05) rotate(0deg);
 }
 
+/* === FLOATING IDLE ANIMATION === */
+@keyframes floatLeft {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-5px) rotate(0deg); }
+}
+
+@keyframes floatRight {
+  0%, 100% { transform: translateY(0) rotate(2deg); }
+  50% { transform: translateY(5px) rotate(0deg); }
+}
+
 /* === LETTER MESSAGE (PAPER) === */
 .paper {
   margin-top: 20px;
   padding: 20px;
-  background: 
-    url("../assets/paper-texture.png") center center / contain no-repeat,
-    repeating-linear-gradient(0deg, #fffefc, #fffefc 28px, #f5f5f5 28px, #f5f5f5 30px);
-  background-blend-mode: multiply;
+  background: #fffefc;
   color: #1a1a1a;
   border: 2px solid #d6ccc2;
   border-radius: 6px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-  font-family: 'Courier New', monospace;
-  font-size: 14px;
-  line-height: 1.6;
+  font-family: 'Special Elite', 'Courier New', monospace;
+  font-size: 15px;
+  line-height: 1.7;
   opacity: 0;
   transform: scale(0.8);
   transition: all 0.4s ease;
@@ -173,8 +185,9 @@ body {
   max-width: 400px;
   z-index: 5;
   position: relative;
-  background-size: cover;
 }
+
+/* === SHOW PAPER === */
 .paper.show {
   opacity: 1;
   transform: scale(1);
