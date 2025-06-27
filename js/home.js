@@ -3,25 +3,43 @@ document.addEventListener("DOMContentLoaded", () => {
   const muteBtn = document.getElementById("mute-btn");
   const bgMusic = document.getElementById("bgMusic");
 
-  // 💌 Envelope Open Interaction
   envelopes.forEach((env) => {
+    let stage = 0; // 0 = back only, 1 = front (flipped), 2 = paper shown, 3 = paper zoomed
+
     env.addEventListener("click", () => {
-      if (env.classList.contains("opened")) return;
+      if (stage === 0) {
+        env.classList.add("flipped");
+        env.textContent = "Open when you're sad 💔"; // Back text
+        stage = 1;
+        return;
+      }
 
-      env.classList.add("opened");
+      if (stage === 1) {
+        env.classList.add("opened");
+        env.textContent = ""; // Clear front text
 
-      const paper = document.createElement("div");
-      paper.className = "paper";
-      paper.innerHTML = `
-        <p>This is a placeholder message 💌</p>
-        <p>You’ll replace this with something beautiful, Bolt. Just like your thoughts.</p>
-      `;
+        const paper = document.createElement("div");
+        paper.className = "paper";
+        paper.innerHTML = `
+          <p>This is a placeholder message 💌</p>
+          <p>You’ll replace this with something beautiful, Bolt. Just like your thoughts.</p>
+        `;
+        env.parentNode.insertBefore(paper, env.nextSibling);
+        setTimeout(() => paper.classList.add("show"), 100);
+        stage = 2;
 
-      // Insert after envelope
-      env.parentNode.insertBefore(paper, env.nextSibling);
+        paper.addEventListener("click", () => {
+          if (stage === 2) {
+            paper.classList.add("zoomed");
+            stage = 3;
+          } else if (stage === 3) {
+            paper.classList.remove("zoomed");
+            stage = 2;
+          }
+        });
 
-      // Auto-scroll to the opened letter (mobile-friendly)
-      paper.scrollIntoView({ behavior: "smooth", block: "center" });
+        return;
+      }
     });
   });
 
