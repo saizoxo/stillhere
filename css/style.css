@@ -1,4 +1,4 @@
-/* Global Reset and Font Setup */
+/* 🌐 Global Reset and Font Setup */
 * {
   margin: 0;
   padding: 0;
@@ -14,15 +14,18 @@ html, body {
   color: #ffffff;
 }
 
-/* Particle Background */
+/* 🌌 Particle Background */
 #particles-js {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   z-index: 0;
+  pointer-events: none;
 }
 
-/* Container Layer */
+/* 🧱 Container Layer */
 .container {
   position: relative;
   z-index: 1;
@@ -31,9 +34,11 @@ html, body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  perspective: 800px;
+  perspective-origin: center;
 }
 
-/* Audio Button Styling */
+/* 🔊 Audio Button Styling */
 .audio-toggle {
   position: absolute;
   top: 20px;
@@ -63,7 +68,7 @@ html, body {
   box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
 }
 
-/* Login Box */
+/* 🔐 Login Box */
 .login-box {
   background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(10px);
@@ -75,9 +80,12 @@ html, body {
   width: 90%;
   max-width: 400px;
   animation: fadeIn 1s ease forwards;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.2s ease;
 }
 
-/* Title */
+/* 📝 Title */
 .login-box h1.title {
   font-size: 26px;
   margin-bottom: 25px;
@@ -85,7 +93,7 @@ html, body {
   text-shadow: 0 0 4px rgba(255, 255, 255, 0.3);
 }
 
-/* Password Field */
+/* 🔐 Password Field */
 .login-box input[type="password"] {
   width: 100%;
   padding: 14px;
@@ -102,7 +110,7 @@ html, body {
   color: rgba(255, 255, 255, 0.45);
 }
 
-/* Unlock Button */
+/* 🚪 Unlock Button */
 #unlock-btn {
   width: 100%;
   padding: 12px;
@@ -121,7 +129,7 @@ html, body {
   box-shadow: 0 8px 24px rgba(255, 78, 80, 0.8);
 }
 
-/* Error Message */
+/* ⚠️ Error Message */
 #error-msg {
   color: #ff4e50;
   font-size: 13px;
@@ -130,15 +138,13 @@ html, body {
   text-align: center;
 }
 
-/* Animations */
+/* ✨ Animations */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
-/* ======================== */
-/* 🔓 HOME.HTML VAULT STYLE */
-/* ======================== */
 
+/* 🔐 Vault Styling (Home.html) */
 .vault-container {
   position: relative;
   z-index: 1;
@@ -211,18 +217,4 @@ html, body {
   color: #aaa;
   text-align: center;
   opacity: 0.7;
-}
-#particles-js {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.container {
-  position: relative;
-  z-index: 1;
 }
