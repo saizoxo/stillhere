@@ -12,13 +12,55 @@ const errorMsg = document.getElementById("error-msg");
 const muteBtn = document.getElementById("mute-btn");
 const bgMusic = document.getElementById("bg-music");
 const container = document.querySelector(".container");
+const loginBox = document.querySelector(".login-box");
 
 // ====== EVENT BINDING ======
 unlockBtn?.addEventListener("click", validatePassword);
 muteBtn?.addEventListener("click", toggleMusic);
 window.addEventListener("load", handleAutoplay);
 
-// ====== FUNCTIONS ======
+// ===== 3D Tilt Interaction (Mouse + Touch) =====
+if (loginBox) {
+  // Mouse
+  loginBox.addEventListener("mousemove", handleTilt);
+  loginBox.addEventListener("mouseleave", resetTilt);
+
+  // Touch
+  loginBox.addEventListener("touchmove", handleTiltTouch, { passive: true });
+  loginBox.addEventListener("touchend", resetTilt);
+}
+
+// 🔄 Tilt on Mouse
+function handleTilt(e) {
+  const { offsetWidth: w, offsetHeight: h } = loginBox;
+  const x = e.offsetX;
+  const y = e.offsetY;
+  const rotateX = ((h / 2 - y) / h) * 20;
+  const rotateY = ((x - w / 2) / w) * 20;
+
+  loginBox.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+  loginBox.style.transition = "transform 0.1s ease-out";
+}
+
+// 🔄 Tilt on Touch
+function handleTiltTouch(e) {
+  const touch = e.touches[0];
+  const rect = loginBox.getBoundingClientRect();
+  const x = touch.clientX - rect.left;
+  const y = touch.clientY - rect.top;
+
+  const rotateX = ((rect.height / 2 - y) / rect.height) * 20;
+  const rotateY = ((x - rect.width / 2) / rect.width) * 20;
+
+  loginBox.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+  loginBox.style.transition = "transform 0.1s ease-out";
+}
+
+// 🔁 Reset Tilt
+function resetTilt() {
+  loginBox.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)";
+  loginBox.style.transition = "transform 0.6s ease";
+}
 
 // 🔐 Validate Password
 function validatePassword() {
