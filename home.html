@@ -2,14 +2,81 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>still here</title>
 
-  <!-- Font & Favicon -->
+  <!-- Fonts & Favicon -->
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet" />
   <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
 
-  <!-- Styles -->
+  <!-- Music Control & JS -->
+  <script defer>
+    document.addEventListener("DOMContentLoaded", () => {
+      const envelopes = document.querySelectorAll(".envelope");
+      const muteBtn = document.getElementById("mute-btn");
+      const bgMusic = document.getElementById("bgMusic");
+
+      envelopes.forEach((env) => {
+        let stage = 0;
+        const paperSlide = env.querySelector(".paper-slide");
+        const paper = env.parentElement.querySelector(".paper");
+
+        env.addEventListener("click", (e) => {
+          e.stopPropagation();
+          envelopes.forEach((other) => {
+            if (other !== env) {
+              other.classList.remove("open");
+              other.dataset.stage = "0";
+              other.querySelector(".paper-slide").style.display = "none";
+              const p = other.parentElement.querySelector(".paper");
+              p.classList.remove("show");
+              p.style.transform = "scale(1)";
+              p.style.zIndex = "1";
+            }
+          });
+
+          stage = parseInt(env.dataset.stage || "0");
+
+          if (stage === 0) {
+            env.classList.add("open");
+            paperSlide.style.display = "block";
+            env.dataset.stage = "1";
+            return;
+          }
+
+          if (stage === 1) {
+            paper.classList.add("show");
+            env.dataset.stage = "2";
+            return;
+          }
+
+          if (stage === 2) {
+            paper.style.transform = "scale(1.15)";
+            paper.style.zIndex = "10";
+            env.dataset.stage = "3";
+            return;
+          }
+
+          if (stage === 3) {
+            paper.style.transform = "scale(1)";
+            paper.style.zIndex = "1";
+            env.dataset.stage = "2";
+          }
+        });
+      });
+
+      muteBtn.addEventListener("click", () => {
+        if (bgMusic.paused) {
+          bgMusic.play();
+          muteBtn.textContent = "mute";
+        } else {
+          bgMusic.pause();
+          muteBtn.textContent = "unmute";
+        }
+      });
+    });
+  </script>
+
   <style>
     body {
       font-family: 'Special Elite', cursive;
@@ -17,9 +84,28 @@
       background-size: cover;
       backdrop-filter: blur(4px);
       overflow-x: hidden;
+      color: #fff;
       margin: 0;
       padding: 0;
+    }
+
+    .mute-button {
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      z-index: 99;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255,255,255,0.4);
       color: #fff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .mute-button:hover {
+      background: #fff;
+      color: #000;
     }
 
     .letter-list {
@@ -32,11 +118,20 @@
 
     .letter-entry {
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
+      justify-content: center;
+      flex-wrap: wrap;
       position: relative;
-      max-width: 800px;
       width: 100%;
+      max-width: 960px;
+    }
+
+    .letter-entry.left .envelope {
+      animation: floatLeft 5s ease-in-out infinite;
+    }
+
+    .letter-entry.right .envelope {
+      animation: floatRight 5s ease-in-out infinite;
     }
 
     .envelope {
@@ -46,12 +141,13 @@
       padding: 20px;
       width: 280px;
       box-shadow: 0 5px 30px rgba(0,0,0,0.5);
+      position: relative;
       cursor: pointer;
       transition: transform 0.3s ease;
       text-align: center;
       font-size: 14px;
-      position: relative;
-      z-index: 1;
+      margin: 0 20px;
+      flex-shrink: 0;
     }
 
     .envelope:hover {
@@ -77,128 +173,89 @@
       display: none;
       background: #fffefc;
       color: #222;
-      padding: 20px;
+      padding: 20px 24px;
       border-radius: 8px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      line-height: 1.8;
       font-size: 14px;
       font-family: 'Special Elite', cursive;
-      line-height: 1.8;
-      max-width: 500px;
-      margin-top: 30px;
-      transform: translateY(0);
-      transition: transform 0.4s ease, opacity 0.4s ease;
-      z-index: 2;
+      max-width: 480px;
+      width: fit-content;
+      margin-top: 20px;
+      white-space: pre-wrap;
+      overflow-y: auto;
+      max-height: 320px;
+      transition: transform 0.3s ease;
+      transform: scale(1);
+      z-index: 1;
     }
 
     .paper.show {
       display: block;
-      transform: translateY(-20px);
-      opacity: 1;
+      animation: fadeIn 0.5s ease-in-out;
     }
 
-    .paper.fullscreen {
-      transform: scale(1.15);
-      z-index: 5;
+    @keyframes floatLeft {
+      0%, 100% { transform: translateX(0px); }
+      50% { transform: translateX(-10px); }
+    }
+
+    @keyframes floatRight {
+      0%, 100% { transform: translateX(0px); }
+      50% { transform: translateX(10px); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
     }
   </style>
 </head>
-<body>
+<body class="unlocked">
 
-  <!-- Music Controls -->
-  <audio id="bgMusic" src="assets/bg-music.mp3" autoplay loop></audio>
-  <button id="mute-btn">mute</button>
+<audio id="bgMusic" src="assets/bg-music.mp3" autoplay loop></audio>
+<button id="mute-btn" class="mute-button">mute</button>
 
-  <!-- Letters -->
-  <div class="letters-timeline">
-    <div class="letter-list">
+<div class="letters-timeline">
+  <div class="letter-list">
 
-      <!-- 💌 Example Letter Entry -->
-      <div class="letter-entry">
-        <div class="envelope" data-id="1" data-stage="0">
-          <div class="paper-slide">
-            <div class="tap-hint">tap to read</div>
-            <div class="paper-mini">“even storms rest...”</div>
-          </div>
-        </div>
-        <div class="paper">
-          hey love i know it’s been heavy lately and everything feels like it’s falling apart but please hold on because this pain won’t last forever you’re doing better than you think and i’m proud of how far you’ve come you don’t have to hide how you feel not from me just rest your head on my words for a while and let yourself breathe for once
+    <div class="letter-entry left">
+      <div class="envelope" data-id="1" data-placeholder="open when you're sad" data-stage="0">
+        <div class="paper-slide">
+          <div class="tap-hint">tap to read</div>
+          <div class="paper-mini">“even storms rest...”</div>
         </div>
       </div>
-
-      <!-- Repeat letter-entry blocks for Letter 2, 3, etc... -->
-      <div class="letter-entry">
-        <div class="envelope" data-id="2" data-stage="0">
-          <div class="paper-slide">
-            <div class="tap-hint">tap to read</div>
-            <div class="paper-mini">“i miss you too”</div>
-          </div>
-        </div>
-        <div class="paper">
-          i know there are days when you miss me more than others when the silence feels louder and your chest a little tighter and if you’re reading this now then maybe today is one of those days so listen to me closely i miss you too i miss your voice your eyes your smile the way you talk and breathe and exist and i promise one day this space between us won’t feel so wide
-        </div>
+      <div class="paper">
+        hey love i know it’s been heavy lately and everything feels like it’s falling apart but please hold on because this pain won’t last forever...
       </div>
-
     </div>
+
+    <div class="letter-entry right">
+      <div class="envelope" data-id="2" data-placeholder="read when you miss me" data-stage="0">
+        <div class="paper-slide">
+          <div class="tap-hint">tap to read</div>
+          <div class="paper-mini">“i miss you too”</div>
+        </div>
+      </div>
+      <div class="paper">
+        i know there are days when you miss me more than others when the silence feels louder and your chest a little tighter...
+      </div>
+    </div>
+
+    <div class="letter-entry left">
+      <div class="envelope" data-id="3" data-placeholder="remember this?" data-stage="0">
+        <div class="paper-slide">
+          <div class="tap-hint">tap to read</div>
+          <div class="paper-mini">“hehehe…”</div>
+        </div>
+      </div>
+      <div class="paper">
+        remember the day we couldn’t stop laughing and my cheeks started to hurt and you fell back on the bed...
+      </div>
+    </div>
+
   </div>
-
-  <!-- JS Toggle Logic -->
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const envelopes = document.querySelectorAll(".envelope");
-      const muteBtn = document.getElementById("mute-btn");
-      const bgMusic = document.getElementById("bgMusic");
-
-      envelopes.forEach(env => {
-        const slide = env.querySelector(".paper-slide");
-        const paper = env.parentElement.querySelector(".paper");
-
-        env.addEventListener("click", () => {
-          let stage = parseInt(env.dataset.stage || "0");
-
-          // Reset other envelopes
-          envelopes.forEach(other => {
-            if (other !== env) {
-              other.dataset.stage = "0";
-              other.classList.remove("open");
-              const s = other.querySelector(".paper-slide");
-              const p = other.parentElement.querySelector(".paper");
-              if (s) s.style.display = "none";
-              if (p) {
-                p.classList.remove("show", "fullscreen");
-              }
-            }
-          });
-
-          // Toggle logic
-          if (stage === 0) {
-            if (slide) slide.style.display = "block";
-            env.dataset.stage = "1";
-          } else if (stage === 1) {
-            if (paper) {
-              paper.classList.add("show");
-              env.dataset.stage = "2";
-            }
-          } else if (stage === 2) {
-            paper.classList.add("fullscreen");
-            env.dataset.stage = "3";
-          } else {
-            paper.classList.remove("fullscreen");
-            env.dataset.stage = "2";
-          }
-        });
-      });
-
-      muteBtn.addEventListener("click", () => {
-        if (bgMusic.paused) {
-          bgMusic.play();
-          muteBtn.textContent = "mute";
-        } else {
-          bgMusic.pause();
-          muteBtn.textContent = "unmute";
-        }
-      });
-    });
-  </script>
-
+</div>
 </body>
 </html>
