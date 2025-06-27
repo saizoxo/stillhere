@@ -1,6 +1,6 @@
-/* === RESET === */
 @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
 
+/* === RESET === */
 body {
   margin: 0;
   padding: 0;
@@ -45,13 +45,7 @@ body {
   left: 50%;
   width: 4px;
   height: 100%;
-  background: repeating-linear-gradient(
-    to bottom,
-    #ff4e50 0%,
-    #ff4e50 20%,
-    transparent 20%,
-    transparent 40%
-  );
+  background: repeating-linear-gradient(to bottom, #ff4e50 0%, #ff4e50 20%, transparent 20%, transparent 40%);
   animation: pulse 2s linear infinite;
   transform: translateX(-50%);
   z-index: 1;
@@ -82,8 +76,6 @@ body {
   z-index: 2;
   width: 100%;
 }
-
-/* === CONNECTOR STRING TO ENVELOPE === */
 .letter-entry::before {
   content: '';
   position: absolute;
@@ -123,8 +115,8 @@ body {
   animation: floatRight 5s ease-in-out infinite;
 }
 
-/* === FLAP === */
-.envelope::before {
+/* === FLAP TRIANGLE FOR STEP 2 === */
+.envelope.open::before {
   content: '';
   position: absolute;
   top: -60px;
@@ -134,6 +126,25 @@ body {
   background-color: #d4d4d4;
   clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
   z-index: 2;
+}
+
+/* === TAP TEXT ABOVE PAPER === */
+.tap-hint {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+  font-family: 'Special Elite', monospace;
+  animation: floatHint 2.5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 5;
+}
+
+@keyframes floatHint {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-5px); }
 }
 
 /* === PLACEHOLDER TEXT === */
@@ -149,8 +160,6 @@ body {
   padding: 0 10px;
   pointer-events: none;
 }
-
-/* === ENVELOPE HOVER === */
 .envelope:hover {
   transform: scale(1.05) rotate(0deg);
 }
@@ -160,7 +169,6 @@ body {
   0%, 100% { transform: translateY(0) rotate(-2deg); }
   50% { transform: translateY(-5px) rotate(0deg); }
 }
-
 @keyframes floatRight {
   0%, 100% { transform: translateY(0) rotate(2deg); }
   50% { transform: translateY(5px) rotate(0deg); }
@@ -186,8 +194,6 @@ body {
   z-index: 5;
   position: relative;
 }
-
-/* === SHOW PAPER === */
 .paper.show {
   opacity: 1;
   transform: scale(1);
@@ -208,17 +214,17 @@ body {
   position: absolute;
   white-space: nowrap;
   font-size: 16px;
-  opacity: 0.08;
-  animation: floatQuote 20s linear infinite;
+  opacity: 0.15;
+  animation: floatQuote 20s ease-in-out infinite;
   color: #ffffff;
   font-family: 'Special Elite', monospace;
-  top: calc(100% * var(--i) / 15);
-  left: calc(100% * var(--i) / 20);
+  top: calc(100% * var(--i) / 15 + (10px * var(--j)));
+  left: calc(100% * var(--j) / 20 + (15px * var(--i)));
 }
 .floating-quotes span.glow {
   color: #ff4e50;
   text-shadow: 0 0 8px #ff4e50, 0 0 12px #ff4e50;
-  opacity: 0.15;
+  opacity: 0.2;
   animation: floatQuoteGlow 25s ease-in-out infinite;
 }
 
@@ -234,27 +240,9 @@ body {
 
 /* === RESPONSIVE === */
 @media (max-width: 768px) {
-  .letter-entry {
-    justify-content: center !important;
-  }
-
-  .animated-string {
-    left: 50%;
-    transform: translateX(-50%);
-    width: 2px;
-    opacity: 0.6;
-  }
-
-  .envelope {
-    width: 220px;
-    height: 120px;
-  }
-
-  .paper {
-    max-width: 90%;
-  }
-
-  .floating-quotes span {
-    font-size: 12px;
-  }
-  }
+  .letter-entry { justify-content: center !important; }
+  .animated-string { left: 50%; transform: translateX(-50%); width: 2px; opacity: 0.6; }
+  .envelope { width: 220px; height: 120px; }
+  .paper { max-width: 90%; }
+  .floating-quotes span { font-size: 12px; }
+}
