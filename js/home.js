@@ -4,39 +4,43 @@ document.addEventListener("DOMContentLoaded", () => {
   const bgMusic = document.getElementById("bgMusic");
 
   envelopes.forEach((env) => {
-    let stage = 0; // 0 = back of envelope with triangle flap, 1 = flipped front, 2 = opened with paper, 3 = zoomed paper
-    const placeholder = env.getAttribute("data-placeholder") || "Open when you're sad";
+    let stage = 0;
+    const placeholder = env.getAttribute("data-placeholder") || "open me";
 
-    // Start with just the back showing
+    // STEP 0 - Initial state
     env.textContent = "";
     env.setAttribute("data-placeholder", placeholder);
 
+    // STEP HANDLER
     env.addEventListener("click", () => {
-      // Stage 0 → Flip envelope
+      const entry = env.closest(".letter-entry");
+
+      // STEP 0 → Flip envelope + show flap and tab-paper
       if (stage === 0) {
-        env.classList.add("flipped");
-        env.textContent = "Letter from Vera 💌";
+        env.classList.add("open"); // flap appears via CSS
         env.setAttribute("data-placeholder", "");
+        const fakePaper = env.querySelector(".fake-paper");
+        if (fakePaper) fakePaper.style.display = "block";
         stage = 1;
         return;
       }
 
-      // Stage 1 → Open envelope and show paper
+      // STEP 1 → Insert real paper with message
       if (stage === 1) {
-        env.classList.add("opened");
-        env.textContent = "";
+        const realPaper = entry.querySelector(".paper");
+        if (realPaper) return; // avoid duplication
 
         const paper = document.createElement("div");
-        paper.className = "paper";
+        paper.className = "paper show";
         paper.innerHTML = `
-          <p>This is a placeholder message 💌</p>
-          <p>You’ll replace this with something beautiful, Bolt. Just like your thoughts.</p>
+          <div class="fullscreen-hint">click to full screen</div>
+          <p>This is a beautiful note from Vera 💌</p>
+          <p>Don't forget how loved you are, Bolt. Always.</p>
         `;
-        env.parentNode.insertBefore(paper, env.nextSibling);
-        setTimeout(() => paper.classList.add("show"), 100);
+        entry.appendChild(paper);
         stage = 2;
 
-        // Stage 2 → Zoom in on paper
+        // STEP 2 → Zooming logic
         paper.addEventListener("click", () => {
           if (stage === 2) {
             paper.style.transform = "scale(1.15)";
@@ -54,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // 🎵 Mute / Unmute Toggle
+  // 🎵 Mute / Unmute Button
   muteBtn.addEventListener("click", () => {
     if (bgMusic.paused) {
       bgMusic.play();
