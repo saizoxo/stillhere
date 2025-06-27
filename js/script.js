@@ -1,5 +1,3 @@
-// script.js
-
 // ===== CONFIGURATION =====
 const CORRECT_PASSWORD = "iloveyou";
 const MAX_ATTEMPTS = 3;
@@ -13,7 +11,7 @@ const unlockBtn = document.getElementById("unlock-btn");
 const errorMsg = document.getElementById("error-msg");
 const muteBtn = document.getElementById("mute-btn");
 const bgMusic = document.getElementById("bg-music");
-const pageContainer = document.querySelector(".container");
+const container = document.querySelector(".container");
 
 // ====== EVENT BINDING ======
 unlockBtn?.addEventListener("click", validatePassword);
@@ -45,6 +43,18 @@ function onLoginSuccess() {
   });
 }
 
+// 🌀 Fade Out Only the Login UI (not particles)
+function fadeOut(callback) {
+  if (!container) return callback();
+
+  // Only fade the login UI
+  container.style.transition = "opacity 1.2s ease";
+  container.style.opacity = 0;
+
+  // Ensure callback after fade
+  setTimeout(callback, 1200);
+}
+
 // 🎵 Toggle Music
 function toggleMusic() {
   if (bgMusic.paused) {
@@ -56,21 +66,13 @@ function toggleMusic() {
   }
 }
 
-// 💬 Show Error
+// 💬 Show Error Message
 function showError(message) {
   errorMsg.textContent = message;
   errorMsg.style.opacity = 1;
 }
 
-// 🌀 Fade out Animation
-function fadeOut(callback) {
-  if (!pageContainer) return callback();
-  pageContainer.style.transition = "opacity 1.2s ease";
-  pageContainer.style.opacity = 0;
-  setTimeout(callback, 1200);
-}
-
-// 🎧 Handle Autoplay on Load
+// 🎧 Handle Autoplay + Particles on Load
 function handleAutoplay() {
   try {
     bgMusic.play().catch(() => {
@@ -80,14 +82,22 @@ function handleAutoplay() {
     console.error("Audio failed to load:", err);
   }
 
-  loadParticles(); // Load if available
+  loadParticles();
 }
 
-// 🌌 Load Particles
+// 🌌 Load Particles Background
 function loadParticles() {
   if (window.particlesJS) {
     particlesJS.load("particles-js", "js/particles.json", () => {
       console.log("✨ Particles loaded.");
     });
+
+    // Extra: Force canvas visibility
+    setTimeout(() => {
+      const canvas = document.querySelector("#particles-js canvas");
+      if (canvas) canvas.style.opacity = 1;
+    }, 1500);
+  } else {
+    console.warn("⚠️ particlesJS not available");
   }
 }
