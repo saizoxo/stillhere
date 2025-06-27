@@ -193,6 +193,45 @@ body {
   transform: scale(1);
 }
 
+/* === FLOATING QUOTES === */
+.floating-quotes {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.floating-quotes span {
+  position: absolute;
+  white-space: nowrap;
+  font-size: 16px;
+  opacity: 0.08;
+  animation: floatQuote 20s linear infinite;
+  color: #ffffff;
+  font-family: 'Special Elite', monospace;
+  top: calc(100% * var(--i) / 15);
+  left: calc(100% * var(--i) / 20);
+}
+.floating-quotes span.glow {
+  color: #ff4e50;
+  text-shadow: 0 0 8px #ff4e50, 0 0 12px #ff4e50;
+  opacity: 0.15;
+  animation: floatQuoteGlow 25s ease-in-out infinite;
+}
+
+@keyframes floatQuote {
+  0% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-40px) translateX(10px); }
+  100% { transform: translateY(0) translateX(0); }
+}
+@keyframes floatQuoteGlow {
+  0%, 100% { transform: translateY(0); opacity: 0.15; }
+  50% { transform: translateY(-30px); opacity: 0.3; }
+}
+
 /* === RESPONSIVE === */
 @media (max-width: 768px) {
   .letter-entry {
@@ -214,4 +253,8 @@ body {
   .paper {
     max-width: 90%;
   }
-}
+
+  .floating-quotes span {
+    font-size: 12px;
+  }
+  }
