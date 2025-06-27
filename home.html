@@ -5,276 +5,116 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>still here</title>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet" />
+  <!-- Fonts & Favicon -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet" />
   <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
 
-  <!-- Background Music -->
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/home.css" />
 
-    body {
-      font-family: 'Special Elite', cursive;
-      background: linear-gradient(to bottom, #140101, #1a0000);
-      background-attachment: fixed;
-      background-size: cover;
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
-      color: #fff;
-    }
-
-    .mute-button {
-      position: fixed;
-      top: 20px;
-      right: 30px;
-      z-index: 20;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255,255,255,0.4);
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    .letters-timeline {
-      padding: 80px 20px;
-      max-width: 1000px;
-      margin: auto;
-      position: relative;
-    }
-
-    .letter-list {
-      display: flex;
-      flex-direction: column;
-      gap: 160px;
-      align-items: center;
-    }
-
-    .letter-entry {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      position: relative;
-      width: 100%;
-    }
-
-    .letter-entry.left .envelope {
-      animation: floatLeft 5s ease-in-out infinite;
-    }
-
-    .letter-entry.right .envelope {
-      animation: floatRight 5s ease-in-out infinite;
-    }
-
-    .envelope {
-      background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
-      border-radius: 10px;
-      width: 260px;
-      padding: 20px;
-      text-align: center;
-      position: relative;
-      cursor: pointer;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      transition: transform 0.3s ease;
-      z-index: 3;
-    }
-
-    .envelope:hover {
-      transform: scale(1.05);
-    }
-
-    .envelope::after {
-      content: attr(data-placeholder);
-      position: absolute;
-      bottom: 10px;
-      left: 0;
-      width: 100%;
-      text-align: center;
-      color: #555;
-      font-size: 14px;
-      pointer-events: none;
-    }
-
-    .envelope.open::after {
-      content: "";
-    }
-
-    .paper-slide {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translate(-50%, 120%);
-      background: #fffdf7;
-      color: #2e2e2e;
-      padding: 12px 16px;
-      border-radius: 4px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.25);
-      font-size: 14px;
-      width: 90%;
-      display: none;
-    }
-
-    .envelope.open .paper-slide {
-      display: block;
-      transform: translate(-50%, 20%);
-    }
-
-    .paper-mini {
-      font-weight: bold;
-    }
-
-    .paper {
-      background: #fffefc;
-      color: #222;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-      max-width: 480px;
-      display: none;
-      transition: all 0.4s ease;
-      z-index: 5;
-    }
-
-    .paper.show {
-      display: block;
-    }
-
-    .floating-quotes {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-    }
-
-    .floating-quotes span {
-      position: absolute;
-      white-space: nowrap;
-      font-size: 16px;
-      opacity: 0.1;
-      animation: floatQuote 20s ease-in-out infinite;
-      color: #ffffff;
-    }
-
-    @keyframes floatLeft {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
-    }
-
-    @keyframes floatRight {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(5px); }
-    }
-
-    @keyframes floatQuote {
-      0% { transform: translateY(0) translateX(0); }
-      50% { transform: translateY(-30px) translateX(20px); }
-      100% { transform: translateY(0) translateX(0); }
-    }
-  </style>
+  <!-- Scripts -->
+  <script src="js/home.js" defer></script>
 </head>
 <body class="unlocked">
+
+  <!-- 🎵 Background Music -->
   <audio id="bgMusic" src="assets/bg-music.mp3" autoplay loop></audio>
   <button id="mute-btn" class="mute-button">mute</button>
 
-  <div class="floating-quotes">
-    <span style="top: 10%; left: 5%;">"I hope you feel seen."</span>
-    <span style="top: 40%; left: 70%;">"Even silence speaks."</span>
-    <span style="top: 70%; left: 30%;">"Love lives in letters."</span>
-  </div>
-
+  <!-- 💌 Letters Timeline -->
   <div class="letters-timeline">
+    <div class="animated-string"></div>
     <div class="letter-list">
-      <!-- Letter -->
+
+      <!-- ✉️ Letter 1 -->
       <div class="letter-entry left">
-        <div class="envelope" data-placeholder="open when you're sad">
+        <div class="envelope" data-id="1" data-placeholder="open when you're sad">
           <div class="paper-slide">
             <div class="tap-hint">tap to read</div>
             <div class="paper-mini">“even storms rest...”</div>
           </div>
-        </div>
-        <div class="paper">
-          hey love i know it’s been heavy lately and everything feels like it’s falling apart but please hold on because this pain won’t last forever you’re doing better than you think and i’m proud of how far you’ve come you don’t have to hide how you feel not from me just rest your head on my words for a while and let yourself breathe for once
+          <div class="paper">
+            <div class="fullscreen-hint">click to full screen</div>
+            <p>Hey you, it’s okay to not be okay. Close your eyes, take a deep breath, and let my love wrap around you like a warm hoodie. You’re safe here. 🤍</p>
+          </div>
         </div>
       </div>
 
-      <!-- Add more letters as needed... -->
+      <!-- ✉️ Letter 2 -->
+      <div class="letter-entry right">
+        <div class="envelope" data-id="2" data-placeholder="read when you miss me">
+          <div class="paper-slide">
+            <div class="tap-hint">tap to read</div>
+            <div class="paper-mini">“i miss you too”</div>
+          </div>
+          <div class="paper">
+            <div class="fullscreen-hint">click to full screen</div>
+            <p>If you’re reading this, it means I’m hugging you in spirit. Maybe we’re far apart now, but our hearts? Always holding hands. 🫂</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ✉️ Letter 3 -->
+      <div class="letter-entry left">
+        <div class="envelope" data-id="3" data-placeholder="remember this?">
+          <div class="paper-slide">
+            <div class="tap-hint">tap to read</div>
+            <div class="paper-mini">“hehehe…”</div>
+          </div>
+          <div class="paper">
+            <div class="fullscreen-hint">click to full screen</div>
+            <p>Remember that one moment we laughed so hard it hurt? Yeah, that one. Replay it in your mind right now. That’s our magic. Still makes me giggle. 🐸💫</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ✉️ Letter 4 -->
+      <div class="letter-entry right">
+        <div class="envelope" data-id="4" data-placeholder="when you need a smile">
+          <div class="paper-slide">
+            <div class="tap-hint">tap to read</div>
+            <div class="paper-mini">“smile, pookie”</div>
+          </div>
+          <div class="paper">
+            <div class="fullscreen-hint">click to full screen</div>
+            <p>This one is short: I love your smile. Show me? There it is 😁 — I felt it from here. You’re beautiful, always have been, always will be.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ✉️ Letter 5 -->
+      <div class="letter-entry left">
+        <div class="envelope" data-id="5" data-placeholder="i wrote this for you">
+          <div class="paper-slide">
+            <div class="tap-hint">tap to read</div>
+            <div class="paper-mini">“mine. yours. always.”</div>
+          </div>
+          <div class="paper">
+            <div class="fullscreen-hint">click to full screen</div>
+            <p>I wrote this because you’re my favorite story. My plot twist. My soft ending. I love you, not just today — but in every version of forever. 💌</p>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const envelopes = document.querySelectorAll(".envelope");
-      const muteBtn = document.getElementById("mute-btn");
-      const bgMusic = document.getElementById("bgMusic");
-
-      envelopes.forEach((env) => {
-        let stage = 0;
-        const placeholder = env.getAttribute("data-placeholder") || "open me";
-        const paperSlide = env.querySelector(".paper-slide");
-        const realPaper = env.parentElement.querySelector(".paper");
-
-        env.dataset.stage = "0";
-
-        env.addEventListener("click", (e) => {
-          e.stopPropagation();
-          stage = parseInt(env.dataset.stage || "0");
-
-          // Close other envelopes
-          envelopes.forEach((otherEnv) => {
-            if (otherEnv !== env) {
-              otherEnv.classList.remove("open");
-              otherEnv.dataset.stage = "0";
-              const otherSlide = otherEnv.querySelector(".paper-slide");
-              const otherPaper = otherEnv.parentElement.querySelector(".paper");
-              if (otherSlide) otherSlide.style.display = "none";
-              if (otherPaper) {
-                otherPaper.classList.remove("show");
-                otherPaper.style.transform = "scale(1)";
-                otherPaper.style.zIndex = "5";
-              }
-            }
-          });
-
-          if (stage === 0) {
-            env.classList.add("open");
-            env.dataset.stage = "1";
-            if (paperSlide) paperSlide.style.display = "block";
-          } else if (stage === 1) {
-            if (realPaper) {
-              realPaper.classList.add("show");
-              env.dataset.stage = "2";
-            }
-          } else if (stage === 2) {
-            if (realPaper) {
-              realPaper.style.transform = "scale(1.15)";
-              realPaper.style.zIndex = "10";
-              env.dataset.stage = "3";
-            }
-          } else if (stage === 3) {
-            if (realPaper) {
-              realPaper.style.transform = "scale(1)";
-              realPaper.style.zIndex = "5";
-              env.dataset.stage = "2";
-            }
-          }
-        });
-      });
-
-      muteBtn.addEventListener("click", () => {
-        if (bgMusic.paused) {
-          bgMusic.play();
-          muteBtn.textContent = "mute";
-        } else {
-          bgMusic.pause();
-          muteBtn.textContent = "unmute";
-        }
-      });
-    });
-  </script>
+  <!-- 💬 Floating Quotes -->
+  <div class="floating-quotes">
+    <span style="top: 10%; left: 5%;">I love you, jaana</span>
+    <span style="top: 20%; left: 60%;">I love you more, jaana. I love you more</span>
+    <span style="top: 35%; left: 20%;">You are my kucha-pucha</span>
+    <span style="top: 50%; left: 75%;">For me, you are my inni si pookie</span>
+    <span style="top: 65%; left: 10%;">I accept</span>
+    <span style="top: 80%; left: 50%;">You are a blessing, jaana. You are a blessing</span>
+    <span style="top: 5%; left: 70%;">Good morning, jaana</span>
+    <span style="top: 25%; left: 35%;">I don’t like to say bye</span>
+    <span style="top: 45%; left: 85%;">Go now, or else I won’t be able to send you</span>
+    <span style="top: 60%; left: 40%;">I’m craving heart for you, jaana</span>
+    <span style="top: 72%; left: 25%;">I will always be yours</span>
+    <span style="top: 85%; left: 75%;">You are mine. I am yours. It’s as simple as that</span>
+    <span class="glow" style="top: 15%; left: 85%;">I love you, Shreya</span>
+  </div>
 </body>
 </html>
