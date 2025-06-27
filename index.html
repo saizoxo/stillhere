@@ -7,7 +7,6 @@
   <meta name="description" content="still here — a place made with love" />
   <meta name="theme-color" content="#0d0d0d" />
   <meta name="robots" content="noindex, nofollow" />
-
   <title>still here</title>
 
   <!-- External CSS -->
@@ -19,12 +18,11 @@
   <!-- Favicon -->
   <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
 </head>
-
 <body>
   <!-- 🌀 Particle Background -->
   <div id="particles-js"></div>
 
-  <!-- 🔒 Login Container -->
+  <!-- 🔒 Main Container -->
   <main class="container" role="main" aria-label="login">
     <!-- 🎧 Mute Toggle -->
     <div class="audio-toggle">
@@ -34,7 +32,13 @@
     <!-- 🔐 Login Box -->
     <section class="login-box" aria-labelledby="password-title">
       <h1 id="password-title" class="title">enter your password</h1>
-      <input type="password" id="password" placeholder="Password..." aria-label="password field" autocomplete="off" />
+      <input
+        type="password"
+        id="password"
+        placeholder="Password..."
+        aria-label="password field"
+        autocomplete="off"
+      />
       <button id="unlock-btn" aria-label="unlock">unlock</button>
       <p id="error-msg" role="alert" aria-live="polite"></p>
     </section>
@@ -46,72 +50,67 @@
     Your browser does not support the audio element.
   </audio>
 
-  <!-- 🔧 Scripts -->
+  <!-- 🔧 Particle.js -->
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-  
-  <!-- 🌌 Inline Particle Config (no JSON) -->
   <script>
     particlesJS("particles-js", {
-      "particles": {
-        "number": { "value": 90, "density": { "enable": true, "value_area": 800 } },
-        "color": { "value": "#ffffff" },
-        "shape": {
-          "type": "circle",
-          "stroke": { "width": 0, "color": "#000000" },
-          "polygon": { "nb_sides": 6 }
+      particles: {
+        number: { value: 90, density: { enable: true, value_area: 800 } },
+        color: { value: "#ffffff" },
+        shape: {
+          type: "circle",
+          stroke: { width: 0, color: "#000000" },
+          polygon: { nb_sides: 6 }
         },
-        "opacity": {
-          "value": 0.25,
-          "random": true,
-          "anim": {
-            "enable": true,
-            "speed": 0.8,
-            "opacity_min": 0.1,
-            "sync": false
-          }
+        opacity: {
+          value: 0.25,
+          random: true,
+          anim: { enable: true, speed: 0.8, opacity_min: 0.1, sync: false }
         },
-        "size": {
-          "value": 3,
-          "random": true,
-          "anim": { "enable": false }
+        size: { value: 3, random: true },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#ffffff",
+          opacity: 0.1,
+          width: 1
         },
-        "line_linked": {
-          "enable": true,
-          "distance": 150,
-          "color": "#ffffff",
-          "opacity": 0.1,
-          "width": 1
-        },
-        "move": {
-          "enable": true,
-          "speed": 1.6,
-          "direction": "none",
-          "random": true,
-          "straight": false,
-          "out_mode": "out",
-          "bounce": false
+        move: {
+          enable: true,
+          speed: 1.6,
+          direction: "none",
+          random: true,
+          straight: false,
+          out_mode: "out",
+          bounce: false
         }
       },
-      "interactivity": {
-        "detect_on": "canvas",
-        "events": {
-          "onhover": { "enable": true, "mode": "repulse" },
-          "onclick": { "enable": true, "mode": "push" },
-          "resize": true
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: true, mode: "push" },
+          resize: true
         },
-        "modes": {
-          "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } },
-          "bubble": { "distance": 200, "size": 5, "duration": 2, "opacity": 0.3, "speed": 2 },
-          "repulse": { "distance": 100, "duration": 0.4 },
-          "push": { "particles_nb": 4 },
-          "remove": { "particles_nb": 2 }
+        modes: {
+          grab: { distance: 140, line_linked: { opacity: 0.5 } },
+          bubble: {
+            distance: 200,
+            size: 5,
+            duration: 2,
+            opacity: 0.3,
+            speed: 2
+          },
+          repulse: { distance: 100, duration: 0.4 },
+          push: { particles_nb: 4 },
+          remove: { particles_nb: 2 }
         }
       },
-      "retina_detect": true
+      retina_detect: true
     });
   </script>
 
-  <!-- 🔐 Main Logic -->
+  <!-- 🔐 App Logic -->
   <script src="js/script.js" defer></script>
 </body>
 </html>
