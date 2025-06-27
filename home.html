@@ -5,16 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>still here</title>
 
-  <!-- Fonts & Favicon -->
+  <!-- Font & Favicon -->
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet" />
   <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
 
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/home.css" />
-
-  <!-- Scripts -->
-  <script src="js/home.js" defer></script>
+  <!-- Styles -->
   <style>
     body {
       font-family: 'Special Elite', cursive;
@@ -22,9 +17,9 @@
       background-size: cover;
       backdrop-filter: blur(4px);
       overflow-x: hidden;
-      color: #fff;
       margin: 0;
       padding: 0;
+      color: #fff;
     }
 
     .letter-list {
@@ -37,20 +32,11 @@
 
     .letter-entry {
       display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      flex-wrap: wrap;
+      flex-direction: column;
+      align-items: center;
       position: relative;
+      max-width: 800px;
       width: 100%;
-      max-width: 960px;
-    }
-
-    .letter-entry.left .envelope {
-      animation: floatLeft 5s ease-in-out infinite;
-    }
-
-    .letter-entry.right .envelope {
-      animation: floatRight 5s ease-in-out infinite;
     }
 
     .envelope {
@@ -60,13 +46,12 @@
       padding: 20px;
       width: 280px;
       box-shadow: 0 5px 30px rgba(0,0,0,0.5);
-      position: relative;
       cursor: pointer;
       transition: transform 0.3s ease;
       text-align: center;
       font-size: 14px;
-      margin: 0 20px;
-      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
     }
 
     .envelope:hover {
@@ -92,54 +77,44 @@
       display: none;
       background: #fffefc;
       color: #222;
-      padding: 20px 24px;
+      padding: 20px;
       border-radius: 8px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-      line-height: 1.8;
       font-size: 14px;
       font-family: 'Special Elite', cursive;
-      max-width: 480px;
-      width: fit-content;
-      margin-top: 20px;
-      white-space: pre-wrap;
-      overflow-y: auto;
-      max-height: 320px;
+      line-height: 1.8;
+      max-width: 500px;
+      margin-top: 30px;
+      transform: translateY(0);
+      transition: transform 0.4s ease, opacity 0.4s ease;
+      z-index: 2;
     }
 
     .paper.show {
       display: block;
-      animation: fadeIn 0.5s ease-in-out;
+      transform: translateY(-20px);
+      opacity: 1;
     }
 
-    @keyframes floatLeft {
-      0%, 100% { transform: translateX(0px); }
-      50% { transform: translateX(-10px); }
-    }
-
-    @keyframes floatRight {
-      0%, 100% { transform: translateX(0px); }
-      50% { transform: translateX(10px); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
+    .paper.fullscreen {
+      transform: scale(1.15);
+      z-index: 5;
     }
   </style>
 </head>
-<body class="unlocked">
+<body>
 
-  <!-- 🎵 Background Music -->
+  <!-- Music Controls -->
   <audio id="bgMusic" src="assets/bg-music.mp3" autoplay loop></audio>
-  <button id="mute-btn" class="mute-button">mute</button>
+  <button id="mute-btn">mute</button>
 
-  <!-- 💌 Letters Timeline -->
+  <!-- Letters -->
   <div class="letters-timeline">
     <div class="letter-list">
 
-      <!-- ✉️ Letter 1 -->
-      <div class="letter-entry left">
-        <div class="envelope" data-id="1" data-placeholder="open when you're sad">
+      <!-- 💌 Example Letter Entry -->
+      <div class="letter-entry">
+        <div class="envelope" data-id="1" data-stage="0">
           <div class="paper-slide">
             <div class="tap-hint">tap to read</div>
             <div class="paper-mini">“even storms rest...”</div>
@@ -150,9 +125,9 @@
         </div>
       </div>
 
-      <!-- ✉️ Letter 2 -->
-      <div class="letter-entry right">
-        <div class="envelope" data-id="2" data-placeholder="read when you miss me">
+      <!-- Repeat letter-entry blocks for Letter 2, 3, etc... -->
+      <div class="letter-entry">
+        <div class="envelope" data-id="2" data-stage="0">
           <div class="paper-slide">
             <div class="tap-hint">tap to read</div>
             <div class="paper-mini">“i miss you too”</div>
@@ -163,47 +138,67 @@
         </div>
       </div>
 
-      <!-- ✉️ Letter 3 -->
-      <div class="letter-entry left">
-        <div class="envelope" data-id="3" data-placeholder="remember this?">
-          <div class="paper-slide">
-            <div class="tap-hint">tap to read</div>
-            <div class="paper-mini">“hehehe…”</div>
-          </div>
-        </div>
-        <div class="paper">
-          remember the day we couldn’t stop laughing and my cheeks started to hurt and you fell back on the bed and i said you looked like a turtle stuck upside down and you just lost it again yeah that day i think about it a lot actually because that was pure and soft and beautiful and it reminds me that whatever happens we still carry that moment in us
-        </div>
-      </div>
-
-      <!-- ✉️ Letter 4 -->
-      <div class="letter-entry right">
-        <div class="envelope" data-id="4" data-placeholder="when you need a smile">
-          <div class="paper-slide">
-            <div class="tap-hint">tap to read</div>
-            <div class="paper-mini">“smile, pookie”</div>
-          </div>
-        </div>
-        <div class="paper">
-          smile for me please i know it’s a simple thing but you don’t realize how it lights up my whole world you’ve got the kind of smile that makes shadows fade and hearts soften so even if it’s hard today even if everything feels too loud just know that your smile is still the prettiest thing i’ve ever seen and nothing will ever change that
-        </div>
-      </div>
-
-      <!-- ✉️ Letter 5 -->
-      <div class="letter-entry left">
-        <div class="envelope" data-id="5" data-placeholder="i wrote this for you">
-          <div class="paper-slide">
-            <div class="tap-hint">tap to read</div>
-            <div class="paper-mini">“mine. yours. always.”</div>
-          </div>
-        </div>
-        <div class="paper">
-          i wrote this because you are the reason i still believe in softness because you gave me something real and i don’t ever want to go back to before you because even the worst days with you still made me feel more alive than any perfect day without you and i will always come back to you always because you are my home even when everything else is a mess
-        </div>
-      </div>
-
     </div>
   </div>
+
+  <!-- JS Toggle Logic -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const envelopes = document.querySelectorAll(".envelope");
+      const muteBtn = document.getElementById("mute-btn");
+      const bgMusic = document.getElementById("bgMusic");
+
+      envelopes.forEach(env => {
+        const slide = env.querySelector(".paper-slide");
+        const paper = env.parentElement.querySelector(".paper");
+
+        env.addEventListener("click", () => {
+          let stage = parseInt(env.dataset.stage || "0");
+
+          // Reset other envelopes
+          envelopes.forEach(other => {
+            if (other !== env) {
+              other.dataset.stage = "0";
+              other.classList.remove("open");
+              const s = other.querySelector(".paper-slide");
+              const p = other.parentElement.querySelector(".paper");
+              if (s) s.style.display = "none";
+              if (p) {
+                p.classList.remove("show", "fullscreen");
+              }
+            }
+          });
+
+          // Toggle logic
+          if (stage === 0) {
+            if (slide) slide.style.display = "block";
+            env.dataset.stage = "1";
+          } else if (stage === 1) {
+            if (paper) {
+              paper.classList.add("show");
+              env.dataset.stage = "2";
+            }
+          } else if (stage === 2) {
+            paper.classList.add("fullscreen");
+            env.dataset.stage = "3";
+          } else {
+            paper.classList.remove("fullscreen");
+            env.dataset.stage = "2";
+          }
+        });
+      });
+
+      muteBtn.addEventListener("click", () => {
+        if (bgMusic.paused) {
+          bgMusic.play();
+          muteBtn.textContent = "mute";
+        } else {
+          bgMusic.pause();
+          muteBtn.textContent = "unmute";
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>
