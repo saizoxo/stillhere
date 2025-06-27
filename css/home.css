@@ -5,7 +5,6 @@ body {
   font-family: 'Montserrat', sans-serif;
   background: #0d0d0d;
   color: #fff;
-  overflow-x: hidden;
 }
 
 /* Mute Button */
@@ -30,7 +29,7 @@ body {
 /* Letter Timeline Container */
 .letters-timeline {
   position: relative;
-  padding: 100px 40px;
+  padding: 100px 20px;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -111,16 +110,18 @@ body {
   margin-top: 20px;
   padding: 20px;
   width: 300px;
-  background: #1a1a1a;
-  border: 1px solid #fff2;
-  border-radius: 8px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-  animation: slideDown 0.4s ease-out forwards;
-  font-weight: 300;
+  background: #fffefc;
+  color: #1a1a1a;
+  border: 2px solid #d6ccc2;
+  border-radius: 6px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  font-family: 'Courier New', monospace;
   font-size: 14px;
   line-height: 1.6;
-  z-index: 3;
+  animation: slideDown 0.4s ease-out forwards;
   opacity: 0;
+  z-index: 3;
+  white-space: pre-wrap;
 }
 
 .envelope.opened + .paper {
@@ -146,6 +147,9 @@ body {
   }
 
   .animated-string {
-    display: none;
+    width: 2px;
+    left: 5%;
+    transform: translateX(0);
+    opacity: 0.6;
   }
 }
