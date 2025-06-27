@@ -83,6 +83,7 @@ body {
 
 /* Envelope Styling */
 .envelope {
+  position: relative;
   background: #ffffff10;
   border: 1px solid #ffffff30;
   backdrop-filter: blur(10px);
@@ -100,6 +101,42 @@ body {
 .envelope:hover {
   transform: scale(1.05) rotate(-1deg);
   background: rgba(255, 255, 255, 0.15);
+}
+
+/* Paper Reveal */
+.paper {
+  display: none;
+  position: absolute;
+  top: 100%;
+  margin-top: 20px;
+  padding: 20px;
+  width: 300px;
+  background: #1a1a1a;
+  border: 1px solid #fff2;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  animation: slideDown 0.4s ease-out forwards;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.6;
+  z-index: 3;
+  opacity: 0;
+}
+
+.envelope.opened + .paper {
+  display: block;
+  opacity: 1;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
 }
 
 /* Responsive for Small Screens */
