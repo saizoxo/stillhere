@@ -65,7 +65,7 @@ function fadeOut(callback) {
 // 🎵 Toggle Music
 function toggleMusic() {
   if (bgMusic.paused) {
-    bgMusic.play();
+    bgMusic.play().catch(() => {});
     muteBtn.textContent = "mute";
   } else {
     bgMusic.pause();
@@ -73,10 +73,13 @@ function toggleMusic() {
   }
 }
 
-// 💬 Show Error Message
+// 💬 Show Error Message with fade animation
 function showError(message) {
   errorMsg.textContent = message;
-  errorMsg.style.opacity = 1;
+  errorMsg.classList.add("show");
+  setTimeout(() => {
+    if (!message) errorMsg.classList.remove("show");
+  }, 300);
 }
 
 // 🎧 Handle Autoplay on Load
@@ -90,7 +93,7 @@ function handleAutoplay() {
   }
 }
 
-// 🎯 Tilt Logic (Shared)
+// 🎯 Tilt Logic
 function computeTilt(x, y, width, height) {
   const rotateX = ((y / height) - 0.5) * -20;
   const rotateY = ((x / width) - 0.5) * 20;
@@ -116,14 +119,4 @@ function handleTiltTouch(e) {
   loginBox.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
 }
 
-// ⚡ Scale on hover/tap
-function applyScale() {
-  loginBox.style.transition = "transform 0.2s ease";
-  loginBox.style.transform += " scale(1.03)";
-}
-
-// 🔁 Reset Tilt
-function resetTilt() {
-  loginBox.style.transition = "transform 0.4s ease";
-  loginBox.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)";
-}
+// ⚡ Add Initial
