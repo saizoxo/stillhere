@@ -293,3 +293,49 @@ body {
   pointer-events: none;
   user-select: none;
 }
+
+/*idk*/
+.letter-entry {
+  align-items: flex-start;
+  gap: 30px;
+}
+
+.letter-entry.left .paper {
+  order: 2;
+  margin-left: 20px;
+}
+
+.letter-entry.right .paper {
+  order: 1;
+  margin-right: 20px;
+}
+
+.envelope {
+  position: relative;
+  z-index: 2;
+}
+
+.paper {
+  display: none;
+  background: #fffefc;
+  color: #222;
+  padding: 20px 24px;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  line-height: 1.8;
+  font-size: 14px;
+  font-family: 'Special Elite', cursive;
+  max-width: 380px;
+  white-space: pre-wrap;
+  overflow-y: auto;
+  max-height: 320px;
+  transform: scale(0.9);
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.paper.show {
+  display: block;
+  transform: scale(1);
+  opacity: 1;
+}
