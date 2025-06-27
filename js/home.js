@@ -87,3 +87,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+document.querySelectorAll('.envelope').forEach(envelope => {
+  const paper = envelope.querySelector('.paper');
+  
+  envelope.addEventListener('click', () => {
+    // Stage 0 to 1
+    if (!envelope.classList.contains('open')) {
+      envelope.classList.add('open');
+      paper.classList.add('show');
+    }
+    // Stage 1 to 2 (fullscreen)
+    else if (!paper.classList.contains('fullscreen')) {
+      paper.classList.add('fullscreen');
+    }
+    // Stage 2 to 0
+    else {
+      envelope.classList.remove('open');
+      paper.classList.remove('show');
+      paper.classList.remove('fullscreen');
+    }
+  });
+});
