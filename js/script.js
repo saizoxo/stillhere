@@ -1,54 +1,92 @@
 // script.js
 
-// PASSWORD CONFIG
-const correctPassword = "iloveyou";
+// ====== GLOBALS ======
+const correctPassword = "iloveyou";  // Change as needed
 let attemptsLeft = 3;
 
-// DOM ELEMENTS
-const unlockBtn = document.getElementById("unlock-btn");
+// DOM Elements
 const passwordInput = document.getElementById("password");
-const errorMsg = document.getElementById("error-msg");
-const audio = document.getElementById("bg-audio");
-const muteBtn = document.getElementById("mute-btn");
+const unlockBtn = document.getElementById("unlockBtn");
+const errorMsg = document.getElementById("error");
+const pageContent = document.querySelector(".fadeout-container");
+const bgMusic = document.getElementById("bgMusic");
+const muteBtn = document.getElementById("muteBtn");
 
-// PASSWORD CHECK FUNCTION
-unlockBtn.addEventListener("click", function () {
-  const userInput = passwordInput.value.trim();
+// ====== FUNCTIONS ======
 
-  if (userInput === correctPassword) {
-    // Optional: fade out effect
-    document.querySelector(".login-box").style.opacity = 0;
-    setTimeout(() => {
-      window.location.href = "home.html"; // Redirect
-    }, 500); // Wait for fade out
+// Toggle music mute/unmute
+function toggleMute() {
+  if (bgMusic.paused) {
+    bgMusic.play();
+    muteBtn.textContent = "Mute";
+  } else {
+    bgMusic.pause();
+    muteBtn.textContent = "Unmute";
+  }
+}
+
+// Validate password input
+function checkPassword() {
+  const enteredPassword = passwordInput.value.trim();
+
+  if (enteredPassword === correctPassword) {
+    unlockSuccess();
   } else {
     attemptsLeft--;
-    errorMsg.style.display = "block";
-
-    if (attemptsLeft > 0) {
-      errorMsg.textContent = `incorrect password • ${attemptsLeft} attempt${attemptsLeft > 1 ? "s" : ""} left`;
+    if (attemptsLeft <= 0) {
+      window.location.href = "404.html"; // Redirect to custom error page
     } else {
-      // Redirect to 404 if failed 3 times
-      window.location.href = "404.html";
+      showError(`Incorrect password. ${attemptsLeft} attempt(s) left.`);
     }
   }
-});
+}
 
-// MUTE / UNMUTE TOGGLE
-muteBtn.addEventListener("click", function () {
-  if (audio.paused) {
-    audio.play();
-    muteBtn.textContent = "mute";
-  } else {
-    audio.pause();
-    muteBtn.textContent = "unmute";
-  }
-});
-
-// Auto-play if browser allows
-document.addEventListener("DOMContentLoaded", function () {
-  // Try to auto-play (some browsers block autoplay)
-  audio.play().catch(() => {
-    muteBtn.textContent = "unmute";
+// Handle successful login
+function unlockSuccess() {
+  errorMsg.textContent = "";
+  fadeOutContent(() => {
+    window.location.href = "home.html"; // Redirect to home after fade out
   });
+}
+
+// Animate content fade-out
+function fadeOutContent(callback) {
+  if (!pageContent) return callback();
+
+  pageContent.style.transition = "opacity 1.5s ease";
+  pageContent.style.opacity = 0;
+  setTimeout(callback, 1500); // After fade out
+}
+
+// Show error message
+function showError(msg) {
+  errorMsg.textContent = msg;
+  errorMsg.style.opacity = 1;
+  errorMsg.style.transition = "opacity 0.3s ease";
+}
+
+// Optionally initialize particles
+function initParticles() {
+  if (window.particlesJS) {
+    particlesJS.load('particles-js', 'js/particles.json', function () {
+      console.log('🎆 Particles loaded.');
+    });
+  }
+}
+
+// ====== EVENT LISTENERS ======
+unlockBtn.addEventListener("click", checkPassword);
+muteBtn.addEventListener("click", toggleMute);
+
+// Auto-play music if allowed
+window.addEventListener("load", () => {
+  try {
+    bgMusic.play().catch(() => {
+      console.warn("Autoplay blocked.");
+    });
+  } catch (e) {
+    console.error("Music failed to start:", e);
+  }
+
+  initParticles(); // Load particle animation if available
 });
