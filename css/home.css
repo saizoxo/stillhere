@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Special+Elite&display=swap');
 
 /* === RESET === */
 body {
@@ -16,24 +16,24 @@ body {
   position: fixed;
   top: 20px;
   right: 30px;
-  z-index: 10;
+  z-index: 999;
   background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255,255,255,0.4);
+  border: 1px solid rgba(255,255,255,0.3);
   color: #fff;
   padding: 10px 20px;
   border-radius: 8px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 .mute-button:hover {
   background: #fff;
   color: #0d0d0d;
 }
 
-/* === TIMELINE CONTAINER === */
+/* === LETTERS TIMELINE === */
 .letters-timeline {
   position: relative;
-  padding: 100px 20px;
+  padding: 120px 20px;
   max-width: 1000px;
   margin: 0 auto;
 }
@@ -63,17 +63,18 @@ body {
   display: flex;
   flex-direction: column;
   gap: 140px;
-  padding-bottom: 200px;
   align-items: center;
 }
 
 /* === EACH LETTER ENTRY === */
 .letter-entry {
   position: relative;
-  display: flex;
-  justify-content: center;
-  z-index: 2;
   width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+.letter-entry.right {
+  justify-content: flex-end;
 }
 .letter-entry::before {
   content: '';
@@ -98,6 +99,7 @@ body {
   box-shadow: 0 8px 20px rgba(0,0,0,0.3);
   color: #333;
   font-weight: bold;
+  font-size: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -105,57 +107,24 @@ body {
   cursor: pointer;
   transition: transform 0.3s ease;
   overflow: hidden;
-  transform: rotate(-2deg);
   z-index: 3;
   animation: floatLeft 5s ease-in-out infinite;
+  transform: rotate(-2deg);
 }
 .letter-entry.right .envelope {
   transform: rotate(2deg);
   animation: floatRight 5s ease-in-out infinite;
 }
+.envelope:hover {
+  transform: scale(1.05) rotate(0deg);
+}
 @keyframes floatLeft {
   0%, 100% { transform: translateY(0) rotate(-2deg); }
-  50% { transform: translateY(-5px) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(0deg); }
 }
 @keyframes floatRight {
   0%, 100% { transform: translateY(0) rotate(2deg); }
-  50% { transform: translateY(5px) rotate(0deg); }
-}
-
-/* === ENVELOPE OPEN FLAP === */
-.envelope.open::before {
-  content: '';
-  position: absolute;
-  top: -60px;
-  left: 0;
-  width: 100%;
-  height: 60px;
-  background-color: #d4d4d4;
-  clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
-  z-index: 3;
-}
-
-/* === FAKE PAPER STICKING OUT === */
-.envelope.open .fake-paper {
-  position: absolute;
-  top: 75%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #fffefc;
-  border: 1px solid #ccc;
-  width: 160px;
-  height: 32px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Special Elite', monospace;
-  font-size: 13px;
-  color: #222;
-  border-radius: 4px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  z-index: 4;
-  pointer-events: none;
-  opacity: 1;
+  50% { transform: translateY(6px) rotate(0deg); }
 }
 
 /* === PLACEHOLDER TEXT INSIDE ENVELOPE === */
@@ -171,11 +140,8 @@ body {
   padding: 0 10px;
   pointer-events: none;
 }
-.envelope:hover {
-  transform: scale(1.05) rotate(0deg);
-}
 
-/* === LETTER MESSAGE (REAL PAPER) === */
+/* === PAPER (when added later) === */
 .paper {
   margin-top: 20px;
   padding: 20px;
@@ -198,24 +164,6 @@ body {
 .paper.show {
   opacity: 1;
   transform: scale(1);
-}
-
-/* === FULLSCREEN HINT ABOVE PAPER === */
-.fullscreen-hint {
-  position: absolute;
-  top: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 13px;
-  font-family: 'Special Elite', monospace;
-  color: rgba(255,255,255,0.6);
-  animation: floatHint 2.5s ease-in-out infinite;
-  pointer-events: none;
-  z-index: 6;
-}
-@keyframes floatHint {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(-5px); }
 }
 
 /* === FLOATING QUOTES === */
